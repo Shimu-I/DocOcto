@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DocOcto</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@500;600&display=swap">
+<style>:root{--bg:#F6EFF5;--pn:#FDFAFD;--bd:#E3D5E2;--tx:#45263F;--mu:#6A5064;--pk:#70445F;--cy:#64538F;--tint:#F1E8F1;--lilac:#C8B6D8;--wist:#A995C6;--mauve:#A889A5;
+--c-gram:#B03A5B;--c-clar:#8A5C00;--c-style:#3B5FA0;--c-rep:#2D7657;--c-cit:#7A4B8F;--c-str:#1D777D;--z:1;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{font-size:calc(17px*var(--fs,1));scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(1100px 520px at 15% -8%,#fff 0,transparent 62%),var(--bg);color:var(--tx);font:1rem/1.6 Inter,system-ui,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh}
+body.rv{overflow:hidden;height:100vh}
+h1,h2,h3,h4{font-family:"Source Serif 4",Georgia,serif;font-weight:600;line-height:1.25;margin:0}
+button{font:inherit;color:var(--tx);cursor:pointer;background:#fff;border:1px solid var(--bd);border-radius:.6rem;padding:.45rem .9rem}
+button:hover{background:var(--tint)}button:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--wist);outline-offset:2px}
+a{color:var(--pk)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.95rem;padding:.5rem .95rem;border-radius:.6rem;border:1px solid var(--bd);background:#fff;color:var(--tx);cursor:pointer;text-decoration:none}
+.btn.pri,button.pri,.acc{background:var(--pk);border-color:var(--pk);color:#fff}.btn.pri:hover,button.pri:hover,.acc:hover{background:var(--tx)}
+.btn.big{font-size:1.05rem;padding:.7rem 1.3rem}.btn.on{background:var(--lilac);border-color:var(--wist)}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:1.2rem;height:4.2rem;padding:0 1.4rem;background:rgba(253,250,253,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--bd)}
+.logo{display:flex;align-items:center;gap:.6rem;font:600 1.45rem "Source Serif 4",Georgia,serif;color:var(--tx);cursor:pointer;background:none;border:0;padding:0}
+.top nav{display:flex;gap:.3rem;margin-left:1.2rem;flex:1}.top nav a{padding:.5rem .9rem;border-radius:.6rem;color:var(--mu);cursor:pointer;font-size:1rem;position:relative}
+.top nav a:hover{background:var(--tint);color:var(--tx)}.top nav a.on{color:var(--tx);font-weight:600;background:var(--tint)}
+.b{background:var(--pk);color:#fff;border-radius:1rem;padding:0 .5rem;font-size:.8rem;margin-left:.3rem}
+.view{display:none}.view.on{display:block}#view-review.on{display:flex;flex-direction:column;height:calc(100vh - 4.2rem)}
+/* home, manual, about */
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.4rem}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center;padding:3rem 0 2.2rem}
+.eyebrow{color:var(--cy);font-weight:600;font-size:.95rem;margin:0 0 .8rem}.hero h1{font-size:clamp(2.1rem,4.4vw,2.7rem);margin-bottom:1rem}
+.lead{font-size:1.2rem;color:var(--mu);margin:0 0 1.5rem;max-width:34rem}.cta{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}.fine{color:var(--mu);font-size:.95rem;margin:1rem 0 0}
+.ex{background:#fff;border:1px solid var(--bd);border-radius:1rem;padding:1.4rem;box-shadow:0 18px 40px -24px rgba(69,38,63,.35)}
+.exl{margin:0 0 .6rem;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}.exs{font:1.2rem/1.7 "Source Serif 4",Georgia,serif;margin:0 0 1rem}
+.m{background:rgba(138,92,0,.12);border-bottom:2px solid var(--c-clar);border-radius:3px;padding:0 .15rem}
+.exr{border-top:1px solid var(--bd);padding-top:1rem}.exr p{margin:.6rem 0}.fake{display:inline-block;border:1px solid var(--bd);border-radius:.5rem;padding:.25rem .8rem;font-size:.95rem;margin-right:.4rem}.fake.p{background:var(--pk);color:#fff;border-color:var(--pk)}
+.oct{display:block;margin:0 auto 1rem}
+.sec{padding:2.6rem 1.4rem}.sec h2{font-size:1.75rem;margin-bottom:.5rem}.sub{color:var(--mu);font-size:1.1rem;margin:0 0 1.6rem;max-width:42rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:1rem}
+.cardx{background:#fff;border:1px solid var(--bd);border-radius:1rem;padding:1.2rem 1.3rem}.cardx h3{font-size:1.2rem;margin-bottom:.4rem}.cardx p{margin:0;color:var(--mu)}
+.num{display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--lilac);color:var(--tx);font-weight:700;margin-bottom:.6rem}
+.band{background:rgba(200,182,216,.28);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.lg{display:inline-block;border:1px solid var(--c);color:var(--c);border-radius:1rem;padding:0 .6rem;font-size:.9rem;font-weight:600;margin-bottom:.5rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}.two ul{margin:.4rem 0;padding-left:1.2rem}.two li{margin:.35rem 0}
+table.t{border-collapse:collapse;width:100%;background:#fff;border:1px solid var(--bd);border-radius:.8rem;overflow:hidden}.t th,.t td{padding:.65rem .9rem;border-bottom:1px solid var(--bd);text-align:left;font-size:.98rem;vertical-align:top}.t th{background:var(--tint)}
+.foot{border-top:1px solid var(--bd);padding:1.6rem 1.4rem 2.4rem;color:var(--mu);font-size:.95rem}.foot a{cursor:pointer}
+.doc-page{padding:2.2rem 1.4rem 3rem;max-width:50rem}.doc-page h1{font-size:2.3rem;margin-bottom:.4rem}.doc-page h2{font-size:1.6rem;margin:2.2rem 0 .6rem}.doc-page h3{font-size:1.2rem;margin:1.4rem 0 .4rem}
+.doc-page p,.doc-page li{font-size:1.05rem}.doc-page ul,.doc-page ol{padding-left:1.3rem}.toc{background:#fff;border:1px solid var(--bd);border-radius:1rem;padding:1rem 1.3rem;margin:1.2rem 0}.toc a{display:inline-block;margin:.2rem 1rem .2rem 0;cursor:pointer}
+.note{background:var(--tint);border-left:4px solid var(--wist);padding:.8rem 1rem;border-radius:.4rem;margin:1rem 0}kbd{border:1px solid var(--wist);background:#fff;border-radius:.35rem;padding:0 .4rem;font-size:.9rem}
+details{background:#fff;border:1px solid var(--bd);border-radius:.8rem;padding:.7rem 1rem;margin:.6rem 0}summary{cursor:pointer;font-weight:600}
+/* review screen */
+.rbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;padding:.7rem 1.2rem}.file{display:flex;gap:.7rem;align-items:center;background:#fff;border:1px solid var(--bd);border-radius:.7rem;padding:.4rem .9rem;font-size:.95rem;max-width:26rem}
+.file span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ok{color:#1f6a4d;background:#E1F1E9;border-radius:.4rem;padding:.05rem .5rem;font-size:.85rem;white-space:nowrap}
+.seg{display:flex;border:1px solid var(--bd);border-radius:.6rem;overflow:hidden;background:#fff}.seg button{border:0;border-radius:0;padding:.45rem 1rem}.seg .on{background:var(--lilac);font-weight:600}
+.sp{flex:1}.prog{display:flex;align-items:center;gap:.9rem;padding:0 1.2rem .6rem;color:var(--mu);font-size:.95rem}.bar{height:.5rem;flex:1;max-width:18rem;background:#E8DCE7;border-radius:.3rem;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--pk);transition:width .5s}
+.rgrid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 25rem;gap:1rem;padding:0 1.2rem 1.2rem}
+.ws{display:flex;flex-direction:column;min-width:0;min-height:0;border:1px solid var(--bd);border-radius:1rem;background:#fff;overflow:hidden}
+.stage{flex:1;min-height:0;display:flex;position:relative}.docwrap{flex:1;position:relative;min-width:0;overflow:hidden}
+.doc{position:absolute;inset:0;overflow:auto;padding:2.2rem 2.6rem 5rem;font-size:calc(1.12rem*var(--z));line-height:1.85;cursor:default;scroll-behavior:smooth;background:#fff;color:var(--tx)}
+.doc.pan{cursor:grab}.doc h1{font:600 calc(1.9rem*var(--z))/1.25 "Source Serif 4",Georgia,serif;margin:0 0 1.5rem}.doc h2{font:600 calc(1.5rem*var(--z))/1.3 "Source Serif 4",Georgia,serif;margin:2rem 0 .6rem}
+.doc p{margin:0 0 .8em;max-width:calc(40rem*var(--z))}canvas#oct{position:absolute;inset:0;pointer-events:none;width:100%;height:100%;opacity:1;transition:opacity .3s}.oct-soft canvas#oct{opacity:.5}
+.doc table{border-collapse:collapse;margin:.8rem 0}.doc td,.doc th{border:1px solid var(--bd);padding:.4rem .7rem}.doc img{max-width:100%}.doc li{margin:.3rem 0}.doc ul,.doc ol{max-width:calc(40rem*var(--z))}
+.is{border-radius:4px;padding:1px 2px;border:1px solid var(--c);background:color-mix(in srgb,var(--c) 11%,transparent);color:inherit;cursor:pointer;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.is[data-cat=gram]{--c:var(--c-gram);text-decoration:underline wavy var(--c)}.is[data-cat=clar]{--c:var(--c-clar);text-decoration:underline var(--c)}
+.is[data-cat=style]{--c:var(--c-style);text-decoration:underline dotted var(--c)}.is[data-cat=rep]{--c:var(--c-rep);text-decoration:underline dashed var(--c)}
+.is[data-cat=cit]{--c:var(--c-cit);text-decoration:underline double var(--c)}.is[data-cat=str]{--c:var(--c-str);text-decoration:underline overline var(--c)}
+.is.sel{box-shadow:0 0 0 2px var(--c);background:color-mix(in srgb,var(--c) 24%,transparent)}.is.done{--c:#2D7657;text-decoration:none;background:#E3F1EA}.is.rej{opacity:.55;border-style:dashed}
+.nohl .is{border-color:transparent;background:none;text-decoration:none;color:inherit}
+.thumbs{width:6.2rem;flex:none;overflow:auto;padding:1rem 0;display:flex;flex-direction:column;align-items:center;gap:.4rem;border-left:1px solid var(--bd);background:var(--pn)}
+.th{width:4.4rem;height:5.6rem;border:1px solid var(--bd);border-radius:.4rem;background:#fff;padding:.5rem .4rem;display:flex;flex-direction:column;gap:.2rem;position:relative;flex:none;cursor:pointer}
+.th i{height:2px;background:#cdbfd0;border-radius:1px}.th.on{border:2px solid var(--pk);box-shadow:0 0 0 3px rgba(169,149,198,.35)}.tn{font-size:.8rem;color:var(--mu);margin-bottom:.4rem}
+.tb{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;padding:.5rem .7rem;border-top:1px solid var(--bd);background:var(--pn)}
+.tb button{min-width:2.4rem;height:2.4rem;display:grid;place-items:center;padding:0 .5rem;font-size:.9rem}.tb button.on{background:var(--lilac);border-color:var(--wist)}
+.zm{display:flex;border:1px solid var(--bd);border-radius:.6rem;align-items:center;background:#fff}.zm button{border:0}.zm span{min-width:3.4rem;text-align:center}
+.tg{display:flex;align-items:center;gap:.4rem;color:var(--tx);font-size:.9rem;white-space:nowrap}.sw{width:2.7rem;min-width:2.7rem!important;height:1.5rem!important;border-radius:1rem;background:#D8CBD7;position:relative;padding:0!important;border:0}
+.sw::after{content:"";position:absolute;top:.2rem;left:.2rem;width:1.1rem;height:1.1rem;border-radius:50%;background:#fff;transition:.2s}.sw.on{background:var(--pk)}.sw.on::after{left:1.4rem}
+.rp{display:flex;flex-direction:column;gap:1rem;min-height:0;overflow:auto;padding-right:.2rem}.card{background:#fff;border:1px solid var(--bd);border-radius:1rem;padding:1.1rem 1.2rem}
+.card h3{margin:0 0 .5rem;font-size:1.15rem;display:flex;align-items:center;gap:.6rem}.cnt{background:var(--tint);color:var(--pk);border-radius:1rem;padding:0 .6rem;font:600 .9rem Inter,sans-serif}
+.cat{display:flex;align-items:center;gap:.7rem;width:100%;border:0;border-bottom:1px solid var(--bd);border-radius:0;padding:.55rem .3rem;text-align:left;background:none;font-size:1rem}.cat:last-child{border:0}.cat.on{background:var(--tint)}
+.cat .d,.d{width:.8rem;height:.8rem;border-radius:50%;background:var(--c);flex:none}.cat b{margin-left:auto;font-weight:600;font-size:.9rem;background:var(--tint);border-radius:1rem;min-width:1.9rem;text-align:center;padding:0 .5rem}
+.sug{border-color:var(--wist);background:#fff}.chip{display:inline-block;border:1px solid var(--c);color:var(--c);border-radius:.5rem;padding:.05rem .7rem;font-size:.9rem;font-weight:600;margin:.3rem 0}
+.lb{color:var(--mu);margin:.7rem 0 .3rem;font-size:.95rem;font-weight:600}.bx{background:var(--pn);border:1px solid var(--bd);border-radius:.7rem;padding:.8rem .9rem;font-size:1rem;line-height:1.6}
+.bx mark{background:#F6E7B8;color:var(--tx);border-radius:3px;padding:0 .15rem}.bx.new mark{background:#E3F1EA;color:#1f5e44}.why{font-size:.95rem;color:var(--mu);margin:.4rem 0 0;padding-left:1.2rem}
+.act{display:flex;gap:.7rem;margin-top:1rem}.act button{flex:1;padding:.7rem}.mini{display:flex;gap:.5rem;margin-left:auto;font-size:.9rem;color:var(--mu);align-items:center;font-weight:400}.mini button{border:0;background:none;padding:.1rem .5rem;font-size:1.1rem}
+.il{max-height:19rem;overflow:auto;margin-top:.3rem}.ir{display:flex;gap:.7rem;align-items:center;padding:.6rem .4rem;border-bottom:1px solid var(--bd);cursor:pointer;border-radius:.5rem}.ir.on{background:var(--tint)}.ir.dn{opacity:.55}
+.ir .tx{flex:1;min-width:0}.ir .o{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ir .o b{color:#1f6a4d;font-weight:600}.ir .w{font-size:.88rem;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fx{padding:.2rem .8rem!important;font-size:.9rem!important;background:var(--pk)!important;color:#fff!important;border-color:var(--pk)!important}.stt{font-size:.88rem;color:var(--mu)}.em{color:var(--mu);padding:.5rem .3rem;font-size:.95rem}
+.kf{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0}.kc{font-size:.88rem;padding:.2rem .7rem;border-radius:1rem;color:var(--mu)}.kc.on{border-color:var(--pk);color:var(--pk);background:var(--tint);font-weight:600}
+.cardx del{color:#B03A5B;text-decoration:line-through}.cardx ins{color:#1f5e44;text-decoration:none;background:#E3F1EA;border-radius:3px;padding:0 .2rem}
+.bx del,dialog del,.exr del{color:#B03A5B;text-decoration:line-through}.bx ins,dialog ins,.exr ins{color:#1f5e44;text-decoration:none;background:#E3F1EA;border-radius:3px;padding:0 .2rem}
+.pdfpg{position:relative;background:#fff;margin:0 auto 1.1rem;border:1px solid var(--bd);box-shadow:0 6px 18px -10px rgba(69,38,63,.35)}.textLayer{position:absolute;inset:0;overflow:hidden;line-height:1}.textLayer span{color:transparent;position:absolute;white-space:pre;cursor:text;transform-origin:0 0}
+.hlayer{position:absolute;inset:0;pointer-events:none}.is.hb{position:absolute;pointer-events:auto;padding:0;background:color-mix(in srgb,var(--c) 26%,transparent);text-decoration:none}.th.pg{padding:0;overflow:hidden}.th canvas{width:100%;height:100%;display:block}
+.pt-soft .pdfpg{background:#EFE8EE}.pt-soft .pdfpg canvas{filter:brightness(.96) sepia(.05)}.pt-dark .pdfpg{background:#2a1a28}.pt-dark .pdfpg canvas{filter:invert(.88) hue-rotate(180deg) brightness(.92) contrast(.92)}
+.is.hb:not(.sel):not(.done):not(.rej){background:transparent;border:0;border-bottom:2px solid var(--c);border-radius:0}.is.hb:not(.sel):hover{background:color-mix(in srgb,var(--c) 22%,transparent)}.is.hb.sel{background:color-mix(in srgb,var(--c) 30%,transparent);box-shadow:0 0 0 2px var(--c)}
+.hide-review .hb[data-k=review],.hide-style .hb[data-k=style],.hide-error .hb[data-k=error],.hide-check .hb[data-k=check]{display:none}
+.hide-review span.is[data-k=review]:not(.hb),.hide-style span.is[data-k=style]:not(.hb),.hide-error span.is[data-k=error]:not(.hb),.hide-check span.is[data-k=check]:not(.hb){border-color:transparent;background:none;text-decoration:none;color:inherit;box-shadow:none}
+.hb[data-new]::after{content:attr(data-new);position:absolute;left:0;bottom:100%;background:#E3F1EA;color:#1f5e44;border:1px solid #b9dcc9;font:.85rem/1.2 Inter,sans-serif;padding:.15rem .45rem;border-radius:.3rem;white-space:nowrap;z-index:3}
+.rvnote{background:var(--tint);border:1px solid var(--bd);border-radius:.6rem;padding:.7rem 1rem;margin-bottom:1.2rem;font-size:.95rem;color:var(--mu)}
+.sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+dialog{background:#fff;color:var(--tx);border:1px solid var(--wist);border-radius:1rem;padding:1.4rem 1.6rem;max-width:40rem;width:92%;max-height:85vh;overflow:auto}dialog::backdrop{background:rgba(69,38,63,.45)}dialog h3{margin:0 0 .6rem;font-size:1.4rem}dialog h4{margin:1rem 0 .3rem;font-size:1.1rem}dialog ul{margin:.3rem 0;padding-left:1.3rem}
+.st{border-collapse:collapse;width:100%;margin:.6rem 0}.st th,.st td{border-bottom:1px solid var(--bd);padding:.35rem .6rem;text-align:left;font-size:.95rem}
+#toast{position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%);background:var(--tx);color:#fff;border-radius:.7rem;padding:.7rem 1.2rem;opacity:0;transition:.3s;pointer-events:none;z-index:30;max-width:90vw;font-size:1rem}
+@media(max-width:1000px){.rgrid{grid-template-columns:1fr;overflow:auto}.rp{overflow:visible}.ws{min-height:34rem}.hero,.two{grid-template-columns:1fr}.hero h1{font-size:2.5rem}.top nav a{padding:.4rem .6rem}}
+@media(prefers-reduced-motion:reduce){.doc{scroll-behavior:auto}}
+
+.win{background:#fff;border:1px solid var(--bd);border-radius:.8rem;overflow:hidden}.wbar{display:flex;gap:.4rem;align-items:center;padding:.55rem .9rem;border-bottom:1px solid var(--bd);background:var(--pn);color:var(--mu);font-size:.9rem}.wbar i{width:.6rem;height:.6rem;border-radius:50%;background:var(--lilac)}.wbar span{margin-left:.5rem}
+.wbody{padding:1.2rem 1.3rem}.wbody p{font:1.1rem/1.8 "Source Serif 4",Georgia,serif;margin:0 0 1rem}.hl{border-bottom:2px solid var(--c);background:color-mix(in srgb,var(--c) 12%,transparent);border-radius:2px}.sugrow{border-top:1px solid var(--bd);padding-top:.9rem;font-size:1rem}
+.flist{display:grid;grid-template-columns:1fr 1fr;column-gap:3rem}.fi{border-top:1px solid var(--bd);padding:1.1rem 0}.fi h3{font-size:1.15rem;margin-bottom:.3rem}.fi p{margin:0;color:var(--mu)}
+.rows .row{display:grid;grid-template-columns:11rem 1fr;gap:1rem;padding:.8rem 0;border-top:1px solid var(--bd);align-items:baseline}.rows .row .lg{margin:0;justify-self:start}.rows del{color:#B03A5B}.rows ins{color:#1f5e44;text-decoration:none;background:#E3F1EA;border-radius:3px;padding:0 .2rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem}.step h3{font-size:1.2rem;margin-bottom:.3rem}.step p{margin:0;color:var(--mu)}
+.dz{border:2px dashed var(--wist);border-radius:1rem;background:#fff;padding:2.4rem 1.5rem;text-align:center;cursor:pointer;max-width:44rem}.dz:hover,.dz.over{background:var(--tint);border-color:var(--pk)}.dz h3{font-size:1.35rem;margin-bottom:.3rem}.dz p{margin:.2rem 0;color:var(--mu)}
+.dzerr{color:#B03A5B;min-height:1.6rem;margin:.7rem 0;font-weight:600}
+.foot{padding:2.2rem 0 2.4rem;background:rgba(200,182,216,.18)}.fcols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem}.foot b{color:var(--tx);display:block;margin-bottom:.4rem}.foot p{margin:0}.foot a{display:block;margin:.3rem 0;color:var(--mu);text-decoration:none;cursor:pointer}.foot a:hover{color:var(--pk);text-decoration:underline}
+body.rv .foot{display:none}.menu{display:none}.top nav .btn{margin-left:.4rem}
+.working #st{background:var(--tint);color:var(--tx)}.working #st::before{content:"";display:inline-block;width:.8em;height:.8em;border:2px solid var(--wist);border-top-color:var(--pk);border-radius:50%;animation:spin .8s linear infinite;margin-right:.45rem;vertical-align:-.1em}@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.working #st::before{animation:none}}
+@media(max-width:820px){.top{flex-wrap:wrap;height:auto;min-height:4.2rem;padding:.6rem 1rem;gap:.6rem}.menu{display:inline-flex;align-items:center}.top nav{display:none;order:10;width:100%;flex-direction:column;margin:0;gap:.2rem;flex:none}.top.open nav{display:flex}.top nav a,.top nav .btn{padding:.7rem .8rem;margin:0}.logo{margin-right:auto}
+.flist,.steps,.fcols,.hero,.two{grid-template-columns:1fr}.rows .row{grid-template-columns:1fr;gap:.3rem}.hero{padding:2rem 0 1.5rem}.sec{padding:1.8rem 1.1rem}.wrap{padding:0 1.1rem}.doc-page{padding:1.6rem 1.1rem 2.4rem}.rbar{padding:.6rem .8rem}.rgrid{padding:0 .8rem .8rem}.doc{padding:1.4rem 1.1rem 4rem}.file{max-width:100%}}
+.sec .two{margin-top:1.2rem}.sec .two h3{margin-bottom:.4rem}
+[hidden]{display:none!important}
+</style></head><body>
+<header class="top" id="top"><button class="logo" data-go="home" aria-label="DocOcto home"><svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="#70445F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><ellipse cx="20" cy="13" rx="9" ry="10"/><circle cx="16" cy="16" r="1.7" fill="#45263F" stroke="none"/><circle cx="24" cy="16" r="1.7" fill="#45263F" stroke="none"/><path d="M12 22c-4 3-6 8-9 10M16 24c-2 4-3 7-6 9M24 24c2 4 3 7 6 9M28 22c4 3 6 8 9 10M20 24v10"/></svg>DocOcto</button>
+<nav id="mainnav" aria-label="Main"><a id="nv0" role="button" tabindex="0">Home</a><a id="nvf" role="button" tabindex="0">Features</a><a id="nvh" role="button" tabindex="0">How it works</a><a id="nv2" role="button" tabindex="0">User guide</a><a id="nv3" role="button" tabindex="0">About</a><button class="btn" id="fs" aria-label="Change text size">Aa: Normal</button></nav>
+<button class="btn pri" id="nv1">Open app<span id="nb" class="sr">8</span></button><button class="menu btn" id="menu" aria-label="Menu" aria-expanded="false" aria-controls="mainnav">&#9776;</button><input type="file" id="fi" hidden accept=".docx,.pdf,.txt,.md"></header>
+<main>
+<section id="view-home" class="view on" aria-label="Home">
+<div class="wrap"><div class="hero"><div><p class="eyebrow">Free &middot; Private &middot; Runs on your computer</p><h1>Better writing.<br>Stronger research.</h1>
+<p class="lead">DocOcto reads your paper, highlights writing problems on the real pages, and suggests a fix for each one. You decide every change. Your original file is never touched.</p>
+<div class="cta"><button class="btn pri big" id="h-start">Get started</button><button class="btn big" data-go="manual">Read the user guide</button></div>
+<p class="fine">Works with PDF (with selectable text), Word (.docx), text and Markdown. English only.</p></div>
+<div class="win" role="img" aria-label="Example of DocOcto marking a sentence in a paper"><div class="wbar"><i></i><i></i><i></i><span>paper.pdf</span></div><div class="wbody"><p>In recent years, deep learning has <span class="hl" style="--c:var(--c-style)">achieved remarkable</span> performance. The proposed method is <span class="hl" style="--c:var(--c-clar)">very good</span> and builds on transformers <span class="hl" style="--c:var(--c-cit)">(Vaswani et al 2017)</span>.</p>
+<div class="sugrow"><span class="lg" style="--c:var(--c-clar)">Clarity</span> &ldquo;Very good&rdquo; is vague. Suggested: <del>very good</del> <ins>strong</ins> <span class="fake p">Fix</span><span class="fake">Reject</span></div></div></div></div></div>
+<div class="band"><div class="wrap sec" id="about-project"><h2>About the project</h2><div class="two"><div><h3>The problem</h3><p>Writers of research papers need a careful reviewer. General grammar tools rewrite freely, miss citation mistakes, upload your text to the cloud, and cannot work on a PDF as it is. A wrong edit to a number or a citation can quietly harm a paper.</p></div>
+<div><h3>What DocOcto does</h3><p>It opens your PDF or Word file, finds writing problems with several free checkers, and marks each one on the exact words with a reason and a suggested fix. Suggestions that would change numbers, citations or equations, or make a claim stronger, are removed before you see them. You accept or reject each one.</p></div></div>
+<p class="sub" style="margin-top:1rem">Its purpose is simple: help you polish your writing while keeping full control of your work.</p></div></div>
+<div class="wrap sec" id="features"><h2>Features</h2><p class="sub">What you can do with DocOcto.</p><div class="flist"><div class="fi"><h3>Real pages</h3><p>PDFs appear as the real pages and Word files keep their formatting. Problems are marked on the exact words.</p></div><div class="fi"><h3>Four checks</h3><p>Quick rules, grammar (LanguageTool), AI (free or local) and APA citation consistency. All optional and free.</p></div><div class="fi"><h3>Safe suggestions</h3><p>Every suggestion is checked in code. Anything that changes a number, a citation or an equation, or makes a claim stronger, is discarded.</p></div><div class="fi"><h3>You stay in control</h3><p>Fix, reject or undo each change. A history and a summary show exactly what changed.</p></div><div class="fi"><h3>Private by default</h3><p>Your text stays on your computer. A cloud AI is optional and always asks first.</p></div><div class="fi"><h3>Export</h3><p>Download the revised text as Word or Markdown, plus a review report.</p></div><div class="fi"><h3>Easy to read</h3><p>Large text, a text-size button, calm colours, keyboard shortcuts and reduced-motion support.</p></div><div class="fi"><h3>Octopus guide</h3><p>An animated octopus points at the problem you are looking at. Soften, pause or hide it at any time.</p></div></div>
+<h3 style="margin:2rem 0 .6rem;font-size:1.3rem">Six kinds of problem it finds</h3><div class="rows"><div class="row"><span class="lg" style="--c:var(--c-gram)">Grammar</span><span>The results <del>was</del> <ins>were</ins> significant.</span></div><div class="row"><span class="lg" style="--c:var(--c-clar)">Clarity</span><span>The model is <del>very good</del> <ins>strong</ins>.</span></div><div class="row"><span class="lg" style="--c:var(--c-style)">Style &amp; tone</span><span>We <del>don't</del> <ins>do not</ins> use labels.</span></div><div class="row"><span class="lg" style="--c:var(--c-rep)">Repetition</span><span>This is <del>the the</del> <ins>the</ins> result.</span></div><div class="row"><span class="lg" style="--c:var(--c-cit)">Citation</span><span><del>(Smith 2019)</del> <ins>(Smith, 2019)</ins>, or a missing reference.</span></div><div class="row"><span class="lg" style="--c:var(--c-str)">Structure</span><span><del>And</del> <ins>Additionally,</ins> we report accuracy.</span></div></div></div>
+<div class="band"><div class="wrap sec" id="how"><h2>How it works</h2><p class="sub">Three steps. Nothing changes unless you say so.</p>
+<div class="steps"><div class="step"><span class="num">1</span><h3>Upload your paper</h3><p>Choose a PDF or Word file. It is shown as it really looks, and checks start by themselves.</p></div>
+<div class="step"><span class="num">2</span><h3>See the problems</h3><p>Issues are marked on the exact words, each with a reason. A small octopus points at the one you are reading.</p></div>
+<div class="step"><span class="num">3</span><h3>You decide</h3><p>Press Fix to accept, Reject to keep your words, Undo to go back. Then download your revised text.</p></div></div></div></div>
+<div class="wrap sec" id="start"><h2>Start reviewing</h2><p class="sub">Drop your paper below, or open the app to use the demo.</p>
+<div class="dz" id="dz" tabindex="0" role="button" aria-label="Upload a paper: drop a file here or press Enter to choose one"><h3>Drop your paper here</h3><p>or <b>choose a file</b> from your computer</p><p class="fine">PDF, Word (.docx), text or Markdown &middot; up to 20 MB</p></div>
+<p class="dzerr" id="dzerr" role="alert"></p><p><button class="btn big" id="h-demo">Try the demo paper</button></p></div>
+</section>
+<section id="view-review" class="view" aria-label="Review">
+<div class="rbar"><div class="file"><span id="fn">research_paper (demo)</span><span class="ok" id="st">Demo &#10003;</span></div>
+<div class="seg" role="group" aria-label="Mode"><button class="on" id="mv">View</button><button id="me">Edit</button></div>
+<button class="btn" id="up">Upload paper</button><button class="btn pri" id="qc">Quick check</button><button class="btn" id="gc">Grammar check</button><button class="btn" id="an">AI check</button><span class="sp"></span><button class="btn" id="ed">&#10515; Word (.docx)</button><button class="btn" id="ex">&#10515; Markdown</button><button class="btn" id="sumbtn">Summary</button><button class="btn" id="setbtn">Settings</button></div>
+<div class="prog"><span id="sm">Demo mode: 0 of 8 issues reviewed</span><div class="bar"><i id="pb"></i></div></div>
+<div class="rgrid"><section class="ws"><div class="stage"><div class="docwrap" id="dw"><div class="doc" id="doc"></div><canvas id="oct"></canvas></div><div class="thumbs" id="th"></div></div>
+<div class="tb"><div class="zm"><button id="zo" aria-label="Zoom out">&minus;</button><span id="zl">100%</span><button id="zi" aria-label="Zoom in">+</button></div>
+<button class="on" id="tp" aria-label="Select tool">&#10148;</button><button id="th2" aria-label="Pan tool">&#9995;</button><button id="tf" aria-label="Scroll to the selected issue">&#8981;</button><button id="tt" aria-label="Fit to view">&#9974;</button>
+<span class="sp"></span><button id="pt" aria-label="Page colour: soft, dark or original">Page: soft</button><button id="oa" aria-label="Octopus strength: subtle or full">Octopus: subtle</button><button id="pz">Pause</button>
+<div class="tg">Jump to issue<button class="sw" id="sj" aria-label="Jump to issue when selected"></button></div><div class="tg">Octopus<button class="sw on" id="so" aria-label="Toggle octopus"></button></div><div class="tg">Highlights<button class="sw on" id="sh" aria-label="Toggle highlights"></button></div></div></section>
+<div class="rp"><div class="card"><h3>Detected issues <span class="cnt" id="tc">8</span></h3><div id="cats"></div></div>
+<div class="card"><h3>All issues <span class="cnt" id="tc2">0</span></h3><div class="stt" id="ck" role="status" aria-live="polite">Checks run: none yet</div><div class="kf" id="kf" role="group" aria-label="Which suggestions to show"></div><div class="il" id="il"></div></div>
+<div class="card sug"><h3><span class="d" id="sd"></span>Suggestion<span class="mini"><span id="sn"></span><button id="pv" aria-label="Previous">&lsaquo;</button><button id="nx" aria-label="Next">&rsaquo;</button></span></h3>
+<span class="chip" id="sc"></span><div class="lb">Original text</div><div class="bx" id="so2"></div><div class="lb">Suggested revision</div><div class="bx new" id="ss"></div>
+<div class="lb">Why?</div><ul class="why" id="sw"></ul>
+<div class="act"><button class="acc" id="ac">&#10003; Accept</button><button id="rj">&#10005; Reject</button></div><div class="mini" style="margin:.7rem 0 0"><button id="un">&#8630; Undo</button><span id="ss2"></span></div></div>
+<div class="card"><h3>Change history <span class="cnt" id="hc">0</span></h3><div class="il" id="hist" style="max-height:15rem"></div></div></div></div>
+</section>
+<section id="view-manual" class="view" aria-label="User guide"><div class="wrap doc-page"><h1>User guide</h1><p class="sub">Everything you need to use DocOcto, in plain language.</p><div class="note"><b>This is the full local edition.</b> Grammar check, the citation check and Word export are available.</div>
+<div class="toc"><b>On this page:</b><br><a data-scroll="m1" role="button" tabindex="0">Getting started</a><a data-scroll="m2" role="button" tabindex="0">Supported files</a><a data-scroll="m3" role="button" tabindex="0">The review screen</a><a data-scroll="m4" role="button" tabindex="0">Colours and underlines</a><a data-scroll="m5" role="button" tabindex="0">Reviewing suggestions</a><a data-scroll="m6" role="button" tabindex="0">Reading the results</a><a data-scroll="m7" role="button" tabindex="0">The checks</a><a data-scroll="m8" role="button" tabindex="0">PDF and Word files</a><a data-scroll="m9" role="button" tabindex="0">Exporting</a><a data-scroll="m10" role="button" tabindex="0">Shortcuts</a><a data-scroll="m11" role="button" tabindex="0">Settings</a><a data-scroll="m12" role="button" tabindex="0">Example</a><a data-scroll="m13" role="button" tabindex="0">Problems and answers</a></div>
+<h2 id="m1">1. Getting started</h2><ol><li>On the Home page, drop a paper into <b>Start reviewing</b>, or press <b>Open app</b> (top right) and then <b>Upload paper</b>. You can also press <b>Try the demo paper</b>.</li><li>The paper opens on the Review screen and <b>Quick check</b> runs by itself.</li><li>Click an issue in the list on the right. Read the reason, then press <b>Fix</b> or <b>Reject</b>.</li><li>When you finish, open <b>Summary</b> and download your revised text.</li></ol>
+<h2 id="m2">2. Supported files and limits</h2><table class="t"><tr><th>Format</th><th>Support</th></tr><tr><td>PDF with selectable text</td><td>Yes, shown as real pages (up to 400 pages)</td></tr><tr><td>Word .docx</td><td>Yes, with formatting</td></tr><tr><td>Text and Markdown</td><td>Yes</td></tr><tr><td>Scanned PDF</td><td>Not yet. Run it through OCR first</td></tr><tr><td>Old .doc, .odt, LaTeX, slides, spreadsheets</td><td>No. Convert to .docx, or upload the PDF</td></tr></table>
+<ul><li>Maximum 20 MB, 20,000 paragraphs and 400 PDF pages. Password-protected PDFs do not open.</li><li>English only.</li><li>Good input: a paper with real text, a heading called <em>References</em> for the citation check, and author-year (APA) citations such as (Smith, 2019).</li></ul>
+<h2 id="m3">3. The review screen</h2><ul><li><b>Top bar:</b> file name, View/Edit, the checks, export buttons, Summary and Settings.</li><li><b>Document (middle):</b> your paper with issues marked. Thumbnails jump to a page. The bar underneath has zoom, tools and display switches.</li><li><b>Right panel:</b> issue counts by type, the list of every issue (with a Fix button), the selected suggestion, and your change history.</li></ul>
+<h2 id="m4">4. Colours and underlines</h2><p>Each type of problem has its own colour <em>and</em> underline style, so you never rely on colour alone.</p><table class="t"><tr><th>Type</th><th>Underline</th></tr><tr><td><span class="lg" style="--c:var(--c-gram)">Grammar</span></td><td>Wavy underline</td></tr><tr><td><span class="lg" style="--c:var(--c-clar)">Clarity</span></td><td>Solid underline</td></tr><tr><td><span class="lg" style="--c:var(--c-style)">Style &amp; tone</span></td><td>Dotted underline</td></tr><tr><td><span class="lg" style="--c:var(--c-rep)">Repetition</span></td><td>Dashed underline</td></tr><tr><td><span class="lg" style="--c:var(--c-cit)">Citation</span></td><td>Double underline</td></tr><tr><td><span class="lg" style="--c:var(--c-str)">Structure</span></td><td>Line above and below</td></tr></table>
+<p>Suggestions are also labelled: <b>Likely error</b> (an objective mistake), <b>Optional style</b> (a preference), <b>Citation check</b> (your citations against your reference list) and <b>Review only</b> (nothing to replace, such as a very long sentence; hidden until you press its button).</p>
+<h2 id="m5">5. Reviewing suggestions</h2><ul><li><b>Fix / Accept</b> applies the suggestion. <b>Reject</b> keeps your words. <b>Undo</b> reverses the last action.</li><li>Items with no replacement offer <b>Mark reviewed</b> and <b>Dismiss</b>.</li><li>The preview shows the old text struck through and the new text in green.</li><li>Nothing is changed without your click, and your original file is never modified.</li></ul>
+<h2 id="m6">6. Reading the results</h2><ul><li>Each suggestion shows the <b>original text</b>, the <b>proposed change</b> and a short <b>reason</b>. Read the reason before accepting.</li><li><b>Likely error</b> means a clear mistake such as a repeated word. <b>Optional style</b> is a preference you can ignore.</li><li>The <b>Checks run</b> line says which checks ran, which failed, and how many suggestions were discarded as unsafe.</li><li>A count of zero does not mean the paper is perfect. DocOcto cannot judge meaning, logic or science, and it never checks that a cited source exists.</li><li><b>Summary</b> counts what you accepted, rejected and left open, and downloads a report.</li></ul>
+<h2 id="m7">7. The checks</h2><ul><li><b>Quick check:</b> built-in rules for common mistakes. Needs nothing. Runs on upload.</li><li><b>Grammar check:</b> LanguageTool for grammar and spelling. Local edition. Needs Java: <kbd>sudo apt install -y openjdk-17-jre-headless</kbd> then <kbd>pip install -r requirements-grammar.txt</kbd>.</li><li><b>AI check:</b> an AI reviews the text. Use Ollama on your computer, or a free Gemini or Groq key in the <kbd>.env</kbd> file. A cloud provider receives your text only after you confirm.</li><li><b>Citation check:</b> compares author-year (APA) citations with your reference list: missing references, wrong years, ambiguous citations, author-count mismatches and references never cited.</li></ul>
+<h2 id="m8">8. PDF and Word files</h2><ul><li><b>PDF</b> pages are shown as they are. Highlights are thin underlines; the selected one is filled. If text cannot be found on the page, the issue stays in the list only.</li><li>A PDF is never edited. Press <b>Edit</b> to change the <em>revised text</em>; press <b>View</b> to return to the pages. Accept fixes first, then edit.</li><li><b>Word</b> files keep headings, bold and italic, lists, tables and images. Accepted fixes change the text in place.</li><li><b>Scanned PDFs</b> need OCR first: <kbd>ocrmypdf scan.pdf readable.pdf</kbd>.</li><li><b>Zoom</b> keeps your place. <b>Page: soft / dark / original</b> changes PDF page colour.</li></ul>
+<h2 id="m9">9. Exporting</h2><ul><li><b>Word (.docx)</b> and <b>Markdown</b> contain your revised text (headings, paragraphs and bullets). Bold, tables, images and layout are not carried over.</li><li>The <b>review report</b> (from Summary) lists your changes and history.</li></ul>
+<h2 id="m10">10. Keyboard shortcuts</h2><table class="t"><tr><th>Key</th><th>Action</th></tr><tr><td><kbd>j</kbd> / <kbd>k</kbd></td><td>Next / previous issue</td></tr><tr><td><kbd>a</kbd></td><td>Accept (or mark reviewed)</td></tr><tr><td><kbd>r</kbd></td><td>Reject (or dismiss)</td></tr><tr><td><kbd>u</kbd></td><td>Undo</td></tr><tr><td><kbd>?</kbd></td><td>Open Settings and help</td></tr><tr><td><kbd>Esc</kbd></td><td>Close a dialog</td></tr></table>
+<h2 id="m11">11. Settings</h2><ul><li><b>Text size</b> (top bar or Settings): Normal, Large or Extra large. Your choice is remembered.</li><li><b>Octopus:</b> bold or soft, on or off, and Pause. It also respects your system's reduce-motion setting.</li><li><b>Jump:</b> when on, selecting an issue scrolls the document to it. When off (default) the page only moves when you scroll; use the magnifier button to jump.</li></ul>
+<h2 id="m12">12. Example of correct use</h2><ol><li>Press <b>Try the demo paper</b>. The sentence &ldquo;the proposed method is very good&rdquo; is underlined in yellow.</li><li>Click it in the list. The card says &ldquo;Very good&rdquo; is vague and suggests <ins>strong</ins>.</li><li>Press <b>Fix</b>. The text changes, and the Change history records it. Press <b>Undo</b> to restore it.</li><li>Open <b>Summary</b> to see the count and download the report.</li></ol>
+<h2 id="m13">13. Problems and answers</h2>
+<details><summary>My upload was rejected.</summary><p>Check the file type (PDF, .docx, .txt or .md) and size (20 MB at most). A message under the drop area or at the bottom of the screen says what is wrong.</p></details>
+<details><summary>It says no selectable text was found.</summary><p>The PDF is a scan. Run it through OCR first.</p></details>
+<details><summary>Many suggestions look irrelevant.</summary><p>Hide Optional style or Review only with their buttons, and reject freely. Add technical words to <kbd>ignore_words.txt</kbd> for the grammar check.</p></details>
+<details><summary>The page view does not load.</summary><p>The viewers need two small libraries downloaded once. Run <kbd>python scripts/get_vendor.py</kbd> with internet. Until then the text is shown as plain paragraphs.</p></details>
+<details><summary>Is my paper sent anywhere?</summary><p>Not unless you choose a cloud AI and confirm. Everything else runs on your computer.</p></details>
+<details><summary>Can it fix my PDF directly?</summary><p>No. It keeps your PDF untouched and gives you a revised text to export.</p></details></div></section>
+<section id="view-about" class="view" aria-label="About"><div class="wrap doc-page"><h1>About and technical details</h1><p class="sub">How DocOcto works, how well it works, and where it falls short.</p>
+<h2>Methodology</h2><ol><li><b>Extraction.</b> The browser reads the PDF (PDF.js) or Word file (Mammoth) and splits it into paragraphs. The original file is not changed.</li><li><b>Checks.</b> Up to four checkers propose suggestions: built-in rules, LanguageTool, an AI model, and an APA citation consistency check.</li><li><b>Validation.</b> One validator filters every suggestion. It must be locatable, must not overlap another, and must not change a number, add a citation, alter an equation or strengthen a claim.</li><li><b>Review.</b> Each remaining suggestion is anchored by paragraph, exact phrase and occurrence number, drawn on the page, and applied only if you accept it.</li></ol>
+<h2>Preprocessing</h2><ul><li>PDF text lines are grouped into paragraphs; numbered headings are separated from body text.</li><li>Repeated running headers, footers and page numbers are removed.</li><li>Tables, headings and non-prose text are skipped by the style rules; sentences over 150 words are treated as extraction errors.</li></ul>
+<h2>Data and evaluation</h2><p>The built-in rules were scored on a small set of 35 labelled issues in 41 short paragraphs (8 contain no issue). Matching is strict: a suggestion counts only if its text overlaps the labelled text by at least half.</p>
+<table class="t"><tr><th>Measure</th><th>Built-in rules</th></tr><tr><td>Precision</td><td>82%</td></tr><tr><td>Recall</td><td>51%</td></tr><tr><td>F1</td><td>63%</td></tr><tr><td>Lenient precision / recall</td><td>86% / 54%</td></tr><tr><td>False alarms per 1,000 words</td><td>10</td></tr><tr><td>Clean paragraphs wrongly flagged</td><td>12%</td></tr><tr><td>Correct category / fix among matches</td><td>94% / 89%</td></tr></table>
+<div class="note"><b>Read this first.</b> The labels were written by an AI assistant, not independent people, and the set partly matches what the rules were built to find. Real papers will score lower. Recall by type: citations 100%, style 100%, structure 100%, clarity 71%, repetition 50%, grammar 12%. LanguageTool and AI have not been scored yet.</div>
+<h2>Known limitations</h2><ul><li>Less accurate than paid tools. Rules miss most grammar-agreement errors.</li><li>PDFs are never edited; fixes go into a separate revised text. Scanned PDFs need OCR. Two-column PDFs can be read out of order.</li><li>English and APA author-year citations only. It never checks that a source exists or supports a claim.</li><li>It cannot judge meaning, logic or scientific correctness.</li></ul>
+<h2>Privacy</h2><table class="t"><tr><th>Feature</th><th>Where your text is processed</th></tr><tr><td>Viewing, Quick check, citation check, safety checks, export</td><td>Your computer</td></tr><tr><td>Grammar check</td><td>Your computer</td></tr><tr><td>AI check with Ollama</td><td>Your computer</td></tr><tr><td>AI check with Gemini, Groq or Anthropic</td><td>That provider, only after you confirm</td></tr></table>
+<p>Nothing is stored by the app. It is not independently security-audited; keep it on your own computer.</p>
+<h2>Credits</h2><p>Built with Flask, PDF.js, Mammoth, LanguageTool, python-docx and pypdf. Colour palette inspired by &ldquo;Purple Romance&rdquo; (JollyWed); the six issue colours are added only so problem types can be told apart. Version 0.15, in testing. No license has been chosen yet.</p></div></section>
+</main>
+<footer class="foot" id="foot"><div class="wrap fcols"><div><b>DocOcto</b><p>A free, private writing reviewer for research papers. Automatic suggestions can be wrong and do not replace a human reader.</p></div>
+<div><b>Explore</b><a data-go="home" role="button" tabindex="0">Home</a><a data-section="features" role="button" tabindex="0">Features</a><a data-section="how" role="button" tabindex="0">How it works</a><a data-go="review" role="button" tabindex="0">Open app</a></div>
+<div><b>Documentation</b><a data-go="manual" role="button" tabindex="0">User guide</a><a data-go="about" role="button" tabindex="0">About and technical details</a><a id="f-repo" hidden target="_blank" rel="noopener">GitHub repository</a></div>
+<div id="f-people" hidden><b>Contributors</b><p id="f-owner"></p></div></div></footer>
+<div id="live" class="sr" role="status" aria-live="polite"></div><dialog id="dlg" aria-labelledby="dt"><h3 id="dt"></h3><div id="db"></div><div class="act" style="margin-top:1rem"><button id="dsave" hidden>Download report (.md)</button><button id="dx">Close</button></div></dialog>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),CATS={gram:['Grammar','Grammar & spelling'],clar:['Clarity','Clarity'],style:['Style & Tone','Academic style & tone'],rep:['Repetition','Repetition'],cit:['Citation','Citation check'],str:['Structure','Structure & flow']};
+const I=[
+{id:1,cat:'style',o:'achieved remarkable',s:'achieved strong',w:['“Remarkable” is promotional rather than measurable.','Prefer neutral, evidence-based wording.']},
+{id:2,cat:'clar',o:'very good',s:'strong',w:['Replaces vague wording (“very good”).','Uses more precise academic language.']},
+{id:3,cat:'clar',o:'better results in many different situations.',s:'outperforms existing approaches across a range of scenarios.',w:['“Better” and “many different situations” are imprecise.','Makes the claim specific and measurable. Check it against your data.']},
+{id:4,cat:'gram',o:'effective',s:'effective,',w:['A comma is needed before “and” joining two predicates.','Objective grammar fix.']},
+{id:5,cat:'str',o:'Despite these advances',s:'Despite these advances,',w:['Introductory phrase should be followed by a comma.','Improves logical flow into the contrast.']},
+{id:6,cat:'cit',o:'(Vaswani et al., 2017)',s:'(Vaswani et al., 2017)',w:['Confirm this entry exists in your reference list.','DocOcto has not verified the source.']},
+{id:7,cat:'rep',o:'different approaches',s:'approaches',w:['“Different” repeats the idea of “many studies”.','Removing it keeps the meaning.']},
+{id:8,cat:'gram',o:'widely',s:'widely adopted',w:['The sentence ends without a participle.','Completes the clause; please verify intent.']}];
+I.forEach(i=>i.st='open');
+const P=['<h1>Deep Learning for Natural Language Processing</h1><h2>Abstract</h2>',
+'<p>In recent years, deep learning has {1} performance in natural language processing (NLP) tasks. However, the proposed method is {2} and provides {3} This paper presents a new model that improves state-of-the-art results on several benchmarks. The results show that the model is {4} and can be applied to various NLP tasks.</p>',
+'<h2 style="margin-top:46px" id="s2">1. Introduction</h2><p>Natural language processing has become a key area of research in artificial intelligence. With the success of transformer models {6}, deep learning has greatly improved the ability to understand and generate human language. {5}, there are still challenges in model efficiency, interpretability, and generalization.</p>',
+'<h2 id="s3">2. Related Work</h2><p>Many studies have explored {7} to improve NLP performance. For example, BERT (Devlin et al., 2019) introduced a pre-training strategy that has become {8}.</p><p style="height:300px"></p>'];
+const doc=$('#doc');
+doc.innerHTML=P.join('').replace(/\{(\d+)\}/g,(m,n)=>{const i=I[n-1];return `<span class="is" tabindex="0" data-id="${n}" data-cat="${i.cat}" aria-label="${CATS[i.cat][1]} issue">${i.o}</span>`});
+const el=id=>doc.querySelector(`[data-id="${id}"]`);
+let sel=1,filt=null,stack=[];
+const open=()=>I.filter(i=>i.st=='open'&&vis(i));
+function list(){return I.filter(i=>(!filt||i.cat==filt)&&vis(i))}
+function render(){render0();renderList()}
+function render0(){
+ if(!I.length){$('#cats').innerHTML=Object.keys(CATS).map(c=>`<button class="cat" style="--c:var(--c-${c})"><span class="d"></span>${CATS[c][0]}<b>0</b></button>`).join('');$('#tc').textContent=$('#nb').textContent=0;$('#sc').textContent='None';$('#so2').textContent='No issues yet. Choose Quick check (free) to check this document.';$('#ss').textContent='';$('#sw').innerHTML='';$('#sn').textContent='0 of 0';$('#ac').disabled=$('#rj').disabled=true;if(!busy){$('#pb').style.width='0';$('#sm').textContent=MODE+': not analyzed yet'}return}
+ $('#cats').innerHTML=Object.keys(CATS).map(c=>`<button class="cat ${filt==c?'on':''}" data-c="${c}" style="--c:var(--c-${c})"><span class="d"></span>${CATS[c][0]}<b>${open().filter(i=>i.cat==c).length}</b></button>`).join('');
+ $('#tc').textContent=$('#nb').textContent=open().length;
+ const done=I.length-open().length;if(!busy){$('#pb').style.width=done/I.length*100+'%';$('#sm').textContent=`${MODE}: ${done} of ${I.length} issues reviewed${I.length&&done==I.length?' · all done ✓':''}`}
+ I.forEach(i=>{document.querySelectorAll('[data-id="'+i.id+'"]').forEach((e,k)=>{if(e.classList.contains('hb')){if(k==0&&i.st=='acc'&&i.s!==i.o)e.dataset.new='→ '+i.s;else delete e.dataset.new}e.className='is'+(e.classList.contains('hb')?' hb':'')+(i.st=='acc'?' done':i.st=='rej'?' rej':'')+(i.id==sel?' sel':'')})});
+ const i=I.find(x=>x.id==sel),L=list(),k=L.indexOf(i),c=`var(--c-${i.cat})`;
+ $('#sd').style.background=c;const ch=$('#sc');ch.textContent=CATS[i.cat][0]+(i.kind=='error'?' · likely error':i.kind=='style'?' · optional style':i.kind=='review'?' · review only':i.kind=='check'?' · citation check':'');ch.style.setProperty('--c',c);
+ $('#sn').textContent=`${k+1} of ${L.length}`;
+ const e=el(i.id)||document.createElement('span'),pr=e.previousSibling?.textContent||'',nx=e.nextSibling?.textContent||'';
+ $('#so2').innerHTML='…'+esc(pr.slice(-45))+'<mark>'+esc(i.st=='acc'?i.o0||i.o:(pcs(i.id).join('')||i.o))+'</mark>'+esc(nx.slice(0,40))+'…';
+ $('#ss').innerHTML=i.s===i.o?'<span class="stt">No replacement suggested. Review this text yourself.</span>':'…'+esc(pr.slice(-40))+'<del>'+esc(i.st=='acc'?i.o0||i.o:(pcs(i.id).join('')||i.o))+'</del><ins>'+esc(i.s)+'</ins>'+esc(nx.slice(0,40))+'…';$('#sw').innerHTML=i.w.map(t=>`<li>${esc(String(t))}</li>`).join('');
+ $('#ss2').textContent=i.st=='acc'?'Accepted':i.st=='rej'?'Rejected, you can revisit it':'Pending review';
+ $('#ac').disabled=i.st=='acc';$('#ac').textContent=i.s===i.o?'✓ Mark reviewed':'✓ Accept';$('#rj').textContent=i.s===i.o?'✕ Dismiss':'✕ Reject';
+}
+function select(id,scroll){sel=id;render();annSel(id);if(scroll){if(JUMP)reveal(id);else jumpHint()};tourT=performance.now();tourTarget=id}
+$('#cats').onclick=e=>{const b=e.target.closest('.cat');if(!b)return;filt=filt==b.dataset.c?null:b.dataset.c;if(filt&&I.find(x=>x.id==sel).cat!=filt)sel=list()[0].id;render();$('#nx').click;doc.querySelectorAll('.is').forEach(s=>s.style.opacity=!filt||s.dataset.cat==filt?'':'.25')}
+doc.onclick=e=>{const s=e.target.closest('.is');if(s)select(+s.dataset.id,false)};
+doc.onkeydown=e=>{if(e.key=='Enter'&&e.target.dataset.id)select(+e.target.dataset.id,true)};
+const step=d=>{const L=list();if(!L.length)return;select(L[(L.findIndex(x=>x.id==sel)+d+L.length)%L.length].id,true)};
+$('#nx').onclick=()=>step(1);$('#pv').onclick=()=>step(-1);
+function setSt(i,st){stack.push({id:i.id,st:i.st,t:pcs(i.id)});i.st=st;logH(i,st=='acc'?(i.s===i.o?'reviewed':'accepted'):st=='rej'?(i.s===i.o?'dismissed':'rejected'):st)}
+$('#ac').onclick=()=>{const i=I.find(x=>x.id==sel);setSt(i,'acc');i.o0=i.o;setPcs(i.id,[i.s]);toast(i.s===i.o?'Marked as reviewed. No text was changed.':DOCM&&DOCM.mode=='pdf'?'Added to your revised text. The PDF pages themselves stay as they are. See Change history.':'Revision applied. Undo is available.');render()};
+$('#rj').onclick=()=>{const i=I.find(x=>x.id==sel);setSt(i,'rej');toast('Original wording kept.');render()};
+function undo(){const u=stack.pop();if(!u)return toast('Nothing to undo');const i=I.find(x=>x.id==u.id);i.st=u.st;setPcs(i.id,u.t);logH(i,'undone');select(i.id,false)}
+$('#un').onclick=undo;addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key=='z'&&!doc.isContentEditable){e.preventDefault();undo()}});
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.style.opacity=1;clearTimeout(tt);tt=setTimeout(()=>t.style.opacity=0,2400)}
+
+$('#me').onclick=()=>{doc.contentEditable=true;$('#me').className='on';$('#mv').className='';};$('#mv').onclick=()=>{doc.contentEditable=false;$('#mv').className='on';$('#me').className=''};
+let z=1;const zz=d=>{z=Math.min(1.6,Math.max(.6,z+d));document.documentElement.style.setProperty('--z',z);$('#zl').textContent=Math.round(z*100)+'%';if(window.onZoom)onZoom()};
+$('#zo').onclick=()=>zz(-.1);$('#zi').onclick=()=>zz(.1);$('#tt').onclick=()=>{z=1;zz(0);doc.scrollTo(0,0)};$('#tf').onclick=()=>{select(sel,false);reveal(sel)};
+$('#tp').onclick=()=>{doc.classList.remove('pan');$('#tp').className='on';$('#th2').className=''};$('#th2').onclick=()=>{doc.classList.add('pan');$('#th2').className='on';$('#tp').className=''};
+let drag=null;doc.onmousedown=e=>{if(doc.classList.contains('pan'))drag=[e.clientY,doc.scrollTop]};addEventListener('mouseup',()=>drag=null);addEventListener('mousemove',e=>{if(drag)doc.scrollTop=drag[1]-(e.clientY-drag[0])});
+$('#sh').onclick=e=>{e.target.classList.toggle('on');doc.classList.toggle('nohl',!e.target.classList.contains('on'))};
+let showO=true,paused=matchMedia('(prefers-reduced-motion:reduce)').matches;
+$('#so').onclick=e=>{e.target.classList.toggle('on');showO=e.target.classList.contains('on')};
+const pz=$('#pz');pz.textContent=paused?'Play':'Pause';pz.onclick=()=>{paused=!paused;pz.textContent=paused?'Play':'Pause'};
+// thumbnails (built from page content lines)
+const anchors=[()=>0,()=>$('#s2').offsetTop-30,()=>$('#s3').offsetTop-30,()=>doc.scrollHeight,()=>doc.scrollHeight];
+$('#th').innerHTML=[1,2,3,4,5].map(n=>`<div class="th ${n==1?'on':''}" data-n="${n-1}" role="button" tabindex="0" aria-label="Page ${n}">${'<i></i>'.repeat(9).replace(/<i>/g,(m,o)=>`<i style="width:${60+Math.random()*40|0}%;${Math.random()<.2?'background:#c9a227':''}">`)}</div><div class="tn">${n}</div>`).join('');
+$('#th').onclick=e=>{const t=e.target.closest('.th');if(!t)return;document.querySelectorAll('.th').forEach(x=>x.classList.toggle('on',x==t));doc.scrollTo({top:t.dataset.p!==undefined?doc.querySelector('[data-p="'+t.dataset.p+'"]').offsetTop-30:anchors[+t.dataset.n](),behavior:'smooth'})};
+
+// ===== Octopus v2: 3D mantle mesh + tapered tentacles =====
+const cv=$('#oct'),g=cv.getContext('2d'),SEG=34,CY='92,52,80',PK='51,26,46',VI='84,60,118',COLS=[CY,PK,VI];let W,H;
+function size(){const r=$('#dw').getBoundingClientRect(),d=devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;g.setTransform(d,0,0,d,0,0)}
+addEventListener('resize',size);size();new ResizeObserver(size).observe($('#dw'));
+// [rest direction, length, total curl]: each arm has its own path: left, down, curling in, curling up
+const SP=[[2.7,390,-.8],[2.3,330,1.4],[1.95,300,-.6],[1.7,360,.7],[1.45,400,-.9],[1.1,310,.8],[.7,340,-1.2],[.35,285,1.5]];
+const T=SP.map((p,i)=>({dir:p[0],len:p[1],curl:p[2],ph:i*1.37+.4,amp:.7+((i*3)%4)*.12,r:0,tx:0,ty:0,pulse:0,want:null}));
+let tourT=0,tourI=0,tourTarget=null,time=0,last=performance.now(),used0=-1;
+function tpos(id){const e=el(id);if(!e)return null;const r=e.getClientRects()[0],w=$('#dw').getBoundingClientRect();if(!r)return null;
+ const x=r.left-w.left+r.width/2,y=r.top-w.top+r.height/2;return(x<0||y<0||x>W||y>H)?null:{x,y}}
+const MR=46,MH=128;
+const prof=v=>v<.45?MR*Math.sqrt(1-Math.pow((.45-v)/.45,2)):MR*(1-.48*Math.pow((v-.45)/.55,1.7));
+// 3D surface point (v: top->bottom, a: longitude) -> screen offset + depth
+function proj(v,a,yaw,s){const r=prof(v),x=r*Math.cos(a+yaw),z=r*Math.sin(a+yaw)*.85,y=-MH*.55+v*MH;return[x*s,(y+z*.1)*s,z/MR]}
+function drawMantle(hx,hy,s,t,yaw,rot){
+ g.save();g.translate(hx,hy);g.rotate(rot);
+ g.beginPath();for(let v=0;v<=1.001;v+=.03)g.lineTo(-prof(v)*s,(-MH*.55+v*MH)*s);for(let v=1;v>=0;v-=.03)g.lineTo(prof(v)*s,(-MH*.55+v*MH)*s);g.closePath();
+ const gr=g.createRadialGradient(-12*s,-30*s,5,0,0,110*s);gr.addColorStop(0,'rgba(112,68,95,.55)');gr.addColorStop(.6,'rgba(112,68,95,.36)');gr.addColorStop(1,'rgba(168,137,165,.10)');
+ g.fillStyle=gr;g.fill();
+ drawMantleMesh(s,t,yaw);
+ g.lineJoin='round';g.lineWidth=7;g.strokeStyle='rgba(69,38,63,.14)';g.stroke();g.lineWidth=2.8;g.strokeStyle='rgba(51,26,46,1)';g.stroke();
+ [-1,1].forEach(d=>{const p=proj(.68,Math.PI/2+d*.62,yaw,s);if(p[2]<-.1)return;const k=.75+.25*p[2];
+  g.globalCompositeOperation='source-over';g.fillStyle='rgba(200,182,216,.55)';g.beginPath();g.arc(p[0],p[1],14*s*k,0,7);g.fill();
+  g.shadowColor='rgba(112,68,95,.45)';g.shadowBlur=18;g.fillStyle='#45263F';g.beginPath();g.arc(p[0],p[1],5.5*s*k,0,7);g.fill();g.shadowBlur=0;
+  g.strokeStyle='rgba(112,68,95,.9)';g.lineWidth=1.1;g.beginPath();g.arc(p[0],p[1],10*s*k,0,7);g.stroke();g.globalCompositeOperation='source-over'});
+ g.restore()}
+function drawMantleMesh(s,t,yaw){
+ g.globalCompositeOperation='source-over';const F=[new Path2D,new Path2D,new Path2D],B=new Path2D,nodes=[];
+ const seg=(pa,pb)=>{const a=pa[2]>0&&pb[2]>0;return a};
+ const LN=18,RG=14;
+ for(let k=0;k<LN;k++){const a=k/LN*6.2832,ci=k%3==1?1:k%3==2?2:0;let pr=proj(0,a,yaw,s);
+  for(let v=.035;v<=1.001;v+=.035){const p=proj(v,a,yaw,s),P=seg(pr,p)?F[ci]:B;P.moveTo(pr[0],pr[1]);P.lineTo(p[0],p[1]);pr=p}}
+ for(let j=1;j<RG;j++){const v=j/RG,ci=j%4==0?1:j%2?0:2;let pr=proj(v,0,yaw,s);
+  for(let a=.16;a<=6.45;a+=.16){const p=proj(v,a,yaw,s),P=seg(pr,p)?F[ci]:B;P.moveTo(pr[0],pr[1]);P.lineTo(p[0],p[1]);pr=p}
+  if(j%2)for(let k=0;k<LN;k+=2){const p=proj(v,k/LN*6.2832,yaw,s);if(p[2]>.15)nodes.push(p)}}
+ g.lineWidth=.8;g.strokeStyle=`rgba(${VI},.13)`;g.stroke(B);
+ F.forEach((P,i)=>{g.lineWidth=3.5;g.strokeStyle=`rgba(${COLS[i]},.06)`;g.stroke(P);g.lineWidth=1.3;g.strokeStyle=`rgba(${COLS[i]},.95)`;g.stroke(P)});
+ g.fillStyle='rgba(69,38,63,.85)';nodes.forEach(p=>{g.beginPath();g.arc(p[0],p[1],1.3,0,7);g.fill()});
+ g.globalCompositeOperation='source-over'}
+// procedural centerline: rest curl + travelling wave + slow sway, all from time
+function updateTentacleMotion(t,i,bx,by,s,time){
+ const n=SEG,L=t.len*s/n,P=[[bx,by]];let a=t.dir,x=bx,y=by;
+ for(let k=0;k<n;k++){const u=k/n;a=t.dir+t.curl*Math.pow(u,1.3)+t.amp*(.2+u*.9)*.85*Math.sin(time*2.8+t.ph-u*5.5)+Math.sin(time*1.1+t.ph)*.7*u+Math.sin(time*1.8+t.ph*2-u*3)*.15*u;
+  x+=Math.cos(a)*L;y+=Math.sin(a)*L;P.push([x,y])}
+ return P}
+// bend the chain toward a target with FABRIK, blended by an eased reach factor
+function animateReachTarget(t,P,bx,by,s,dt){
+ const n=SEG,L=t.len*s/n,w=t.want;
+ if(w&&t.r<.03){t.tx=P[n][0];t.ty=P[n][1]}
+ t.r+=((w?1:0)-t.r)*Math.min(1,dt*(w?9:4));
+ if(w){t.tx+=(w.x-t.tx)*Math.min(1,dt*16)}if(w){t.ty+=(w.y-t.ty)*Math.min(1,dt*16)}
+ if(t.r<.01)return;const e=t.r*t.r*(3-2*t.r);
+ let gx=P[n][0]+(t.tx-P[n][0])*e,gy=P[n][1]+(t.ty-P[n][1])*e;
+ const dd=Math.hypot(gx-bx,gy-by),mx=L*n*.97;if(dd>mx){gx=bx+(gx-bx)/dd*mx;gy=by+(gy-by)/dd*mx}
+ P[n]=[gx,gy];
+ for(let it=0;it<6;it++){for(let k=n-1;k>=0;k--){const[ax,ay]=P[k+1],[qx,qy]=P[k],d=Math.hypot(qx-ax,qy-ay)||1;P[k]=[ax+(qx-ax)/d*L,ay+(qy-ay)/d*L]}
+  P[0]=[bx,by];for(let k=0;k<n;k++){const[ax,ay]=P[k],[qx,qy]=P[k+1],d=Math.hypot(qx-ax,qy-ay)||1;P[k+1]=[ax+(qx-ax)/d*L,ay+(qy-ay)/d*L]}}}
+function drawTentacle(t,P,i,s,time){
+ const n=SEG,E1=[],E2=[],Ia=[],Ib=[],Mi=[];
+ for(let k=0;k<=n;k++){const p=P[k],q=P[Math.min(n,k+1)],o=P[Math.max(0,k-1)],dx=q[0]-o[0],dy=q[1]-o[1],d=Math.hypot(dx,dy)||1,tx=dx/d,ty=dy/d,nx=-ty,ny=tx,wd=(Math.pow(1-k/n,.8)*8+1)*s;
+  E1.push([p[0]+nx*wd,p[1]+ny*wd]);E2.push([p[0]-nx*wd,p[1]-ny*wd]);Ia.push([p[0]+nx*wd*.5,p[1]+ny*wd*.5]);Ib.push([p[0]-nx*wd*.5,p[1]-ny*wd*.5]);Mi.push({p,tx,ty,nx,ny,wd})}
+ const pa=A=>{g.beginPath();A.forEach((q,k)=>k?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]))};
+ g.globalCompositeOperation='source-over';g.lineJoin='round';
+ g.beginPath();E1.forEach((q,k)=>k?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));for(let k=n;k>=0;k--)g.lineTo(E2[k][0],E2[k][1]);g.closePath();g.fillStyle='rgba(112,68,95,.34)';g.fill();
+ const ea=i%2?PK:CY,eb=i%2?CY:PK;
+ g.lineWidth=6;g.strokeStyle=`rgba(${ea},.09)`;pa(E1);g.stroke();g.strokeStyle=`rgba(${eb},.09)`;pa(E2);g.stroke();
+ g.lineWidth=2;g.strokeStyle=`rgba(${ea},1)`;pa(E1);g.stroke();g.strokeStyle=`rgba(${eb},1)`;pa(E2);g.stroke();
+ g.lineWidth=.7;g.strokeStyle=`rgba(${VI},.55)`;pa(Ia);g.stroke();pa(Ib);g.stroke();g.strokeStyle='rgba(69,38,63,.28)';pa(P);g.stroke();
+ g.lineWidth=.7;g.strokeStyle=`rgba(${CY},.4)`;g.beginPath();   // curved cross-section rings
+ for(let k=2;k<n-1;k+=2){const m=Mi[k],b=m.wd*.45;g.moveTo(E1[k][0],E1[k][1]);g.quadraticCurveTo(m.p[0]+m.tx*b,m.p[1]+m.ty*b,E2[k][0],E2[k][1])}g.stroke();
+ drawSuctionCups(Mi,t,i);
+ g.globalCompositeOperation='source-over'}
+// cups sit on the inner (underside) edge of the same centerline and flatten as it bends
+function drawSuctionCups(Mi,t,i){
+ const n=SEG,sd=Math.sign(t.curl)||1;
+ for(let k=3;k<n-2;k+=2){const m=Mi[k],r=m.wd*.45;if(r<1.15)break;
+  const cx=m.p[0]+m.nx*m.wd*.55*sd,cy=m.p[1]+m.ny*m.wd*.55*sd,m2=Mi[k+1],ang=Math.atan2(m.ty,m.tx),cur=Math.abs(Math.atan2(m2.ty,m2.tx)-ang)%3.14,sq=.55+Math.min(.35,cur*5),c=COLS[(k/2+i)%3|0];
+  g.strokeStyle=`rgba(${c},.95)`;g.lineWidth=1.2;g.beginPath();g.ellipse(cx,cy,r,r*sq,ang,0,7);g.stroke();
+  g.strokeStyle=`rgba(${c},.5)`;g.lineWidth=.8;g.beginPath();g.ellipse(cx,cy,r*.5,r*sq*.5,ang,0,7);g.stroke();
+  g.fillStyle=`rgba(${c},.18)`;g.beginPath();g.ellipse(cx,cy,r,r*sq,ang,0,7);g.fill()}}
+let hxS=null,hyS=0;
+// the whole octopus travels the window: it parks beside the error it is pointing at, on the side with more room
+function roam(dt,s){
+ const p=tpos(tourTarget||sel);let dx,dy;
+ if(p){dx=p.x+(p.x<W*.5?1:-1)*190*s;dy=p.y-130*s}else{dx=W*.5+Math.sin(time*.5)*W*.3;dy=H*.35+Math.cos(time*.4)*H*.2}
+ dx+=Math.sin(time*.9)*22*s;dy+=Math.cos(time*.7)*16*s;
+ dx=Math.max(100*s,Math.min(W-100*s,dx));dy=Math.max(90*s,Math.min(H-170*s,dy));
+ if(hxS===null){hxS=W*.8;hyS=H*.25}
+ const k=Math.min(1,dt*1.7);hxS+=(dx-hxS)*k;hyS+=(dy-hyS)*k;return{hx:hxS,hy:hyS}}
+function frame(now){
+ try{
+ const dt=Math.min(.05,(now-last)/1000);last=now;if(!paused)time+=dt;
+ g.clearRect(0,0,W,H);
+ if(showO&&W>300){
+  const s=Math.max(.55,Math.min(1.1,W/760)),{hx,hy}=roam(dt,s),yaw=Math.sin(time*.7)*.35,rot=-.1+Math.sin(time*1.1)*.05,cr=Math.cos(rot),sr=Math.sin(rot);
+  const B=T.map((t,i)=>{const p=proj(.97,Math.PI/2-(i-3.5)*.6,yaw,s);return{x:hx+p[0]*cr-p[1]*sr,y:hy+p[0]*sr+p[1]*cr,z:p[2]}});
+  if(now-tourT>2600&&!paused){const vis=open().filter(i=>tpos(i.id));if(vis.length){tourI=(tourI+1)%vis.length;tourTarget=vis[tourI].id}else tourTarget=null;tourT=now}
+  const ids=[],so=I.find(x=>x.id==sel);if(so&&so.st!='acc')ids.push(sel);if(tourTarget&&tourTarget!=sel)ids.push(tourTarget);
+  open().forEach(i=>{if(!ids.includes(i.id))ids.push(i.id)});
+  const tg=[];ids.forEach(id=>{const p=tpos(id);if(p)tg.push({id,p})});
+  T.forEach(t=>t.want=null);
+  const sc=Math.min(1.1,Math.max(.55,W/760)),pairs=[];
+  tg.slice(0,12).forEach((g,k)=>T.forEach((t,i)=>pairs.push({k,i,c:Math.hypot(g.p.x-B[i].x,g.p.y-B[i].y)/(t.len*sc)-(k<2?2:0)-(t.last===g.id?.3:0)})));
+  pairs.sort((x,y)=>x.c-y.c);const uT=new Set,uG=new Set;
+  pairs.forEach(q=>{if(uT.has(q.i)||uG.has(q.k)||q.c>1.25)return;uT.add(q.i);uG.add(q.k);const g=tg[q.k],t=T[q.i];t.last=g.id;
+   t.want={x:g.p.x+Math.cos(time*3+q.i)*7,y:g.p.y+Math.sin(time*2.3+q.i*2)*4}});
+  const ord=[...T.keys()].sort((a,b)=>B[a].z-B[b].z),Ps=[];
+  T.forEach((t,i)=>{const P=updateTentacleMotion(t,i,B[i].x,B[i].y,s,time);animateReachTarget(t,P,B[i].x,B[i].y,s,dt);Ps[i]=P});
+  const tipsOf=i=>{const t=T[i],tp=Ps[i][SEG],w=t.want;
+   if(w&&t.r>.5){const d=Math.hypot(tp[0]-w.x,tp[1]-w.y);t.pulse=d<22?Math.min(1,t.pulse+dt*3):Math.max(0,t.pulse-dt);
+    g.globalCompositeOperation='source-over';g.strokeStyle=`rgba(112,68,95,${.35+t.pulse*.45})`;g.lineWidth=.9;g.beginPath();g.moveTo(tp[0],tp[1]);g.lineTo(w.x,w.y);g.stroke();
+    g.fillStyle='#70445F';g.beginPath();g.arc(w.x,w.y,2.5+t.pulse*2*Math.sin(time*8),0,7);g.fill();g.globalCompositeOperation='source-over'}else t.pulse=Math.max(0,t.pulse-dt);
+   g.shadowColor=i%2?'#A995C6':'#C8B6D8';g.shadowBlur=14+t.pulse*16;g.fillStyle=i%2?'#70445F':'#7B6A9C';g.beginPath();g.arc(tp[0],tp[1],(3.4+t.pulse*2.6)*s,0,7);g.fill();g.shadowBlur=0};
+  ord.filter(i=>B[i].z<.05).forEach(i=>{drawTentacle(T[i],Ps[i],i,s,time);tipsOf(i)});
+  drawMantle(hx,hy,s,time,yaw,rot);
+  ord.filter(i=>B[i].z>=.05).forEach(i=>{drawTentacle(T[i],Ps[i],i,s,time);tipsOf(i)});
+ }}catch(e){console.error('octopus',e)}
+ requestAnimationFrame(frame)}
+// ===== Stage 3-5: real import, AI analysis (via Claude), export =====
+const fi=$('#fi'),PDFW='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+let busy=false,MODE='Demo mode',DOCM=null;
+const hSt=t=>{$('#st').textContent=t;document.body.classList.toggle('working',/\u2026$/.test(t))};
+$('#up').onclick=()=>fi.click();
+fi.onchange=async()=>{const f=fi.files[0];fi.value='';if(!f)return;if(busy)return toast('Wait for the current analysis to finish.');
+ hSt('Parsing…');try{const paras=await readFile(f);if(!paras)return hSt('Demo ✓');
+  DOCM={name:f.name,paras};MODE='Uploaded';$('#fn').textContent='▯ '+f.name;buildDoc(paras,[]);hSt('Parsed ✓');
+  toast(`Parsed ${paras.length} paragraphs. Choose Quick check (free) or AI check.`)}
+ catch(e){console.error(e);hSt('Error');toast('Could not read this file: '+(e.message||e))}};
+async function readFile(f){
+ const n=f.name.toLowerCase(),paras=[];
+ if(/\.(docx|pdf)$/.test(n)){const r=await fetch('/api/parse?name='+encodeURIComponent(f.name),{method:'POST',body:f}),j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||'The server could not read this file.');return j.paras}
+ if(n.endsWith('.docx')){if(!window.mammoth)throw Error('DOCX reader failed to load (needs internet).');
+  const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()}),d=new DOMParser().parseFromString(r.value,'text/html');
+  d.body.querySelectorAll('h1,h2,h3,h4,p,li').forEach(e=>{const t=e.textContent.trim();if(t)paras.push({t,tag:/^H/.test(e.tagName)?'h2':e.tagName=='LI'?'li':'p'})})}
+ else if(n.endsWith('.pdf')){if(!window.pdfjsLib)throw Error('PDF reader failed to load (needs internet).');
+  pdfjsLib.GlobalWorkerOptions.workerSrc=PDFW;const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;
+  for(let pg=1;pg<=pdf.numPages;pg++){const c=await(await pdf.getPage(pg)).getTextContent(),lines=[];let y=null,cur='';
+   c.items.forEach(it=>{const yy=Math.round(it.transform[5]);if(y!==null&&Math.abs(yy-y)>3){lines.push(cur);cur=''}y=yy;cur+=it.str});lines.push(cur);
+   let buf='';lines.forEach(l=>{l=l.trim();if(!l)return;
+    if(!buf&&l.length<80&&!/[.!?,;]$/.test(l)){paras.push({t:l,tag:'h2',page:pg});return}
+    buf+=(buf?' ':'')+l;if((/[.!?]$/.test(l)&&buf.length>120)||buf.length>800){paras.push({t:buf,tag:'p',page:pg});buf=''}});
+   if(buf)paras.push({t:buf,tag:'p',page:pg})}
+  if(paras.map(p=>p.t).join('').length<100){toast('No selectable text found. This looks like a scanned PDF and needs OCR, which this page does not include.');return null}}
+ else if(/\.(txt|md)$/.test(n)){(await f.text()).split(/\n{2,}/).forEach(t=>{t=t.trim();if(t)paras.push({t:t.replace(/^#+\s*/,''),tag:/^#/.test(t)?'h2':'p'})})}
+ else throw Error('Use a .docx, .pdf, .txt or .md file.');
+ if(!paras.length)throw Error('No text found in this file.');
+ return paras}
+// anchors: paragraph index + exact phrase + occurrence number, resolved to offsets per paragraph (overlaps dropped)
+function buildDoc(paras,iss){
+ if(DOCM&&(DOCM.mode=='docx'||DOCM.mode=='pdf'))return buildView(paras,iss);
+ I.length=0;let id=0;const byP={};paras.forEach(p=>p.has=0);
+ iss.forEach(x=>{const t=paras[x.p]&&paras[x.p].t,o=x.o;if(!t||!o||typeof x.s!='string'||!CATS[x.cat])return;let from=-1;
+  for(let k=0;k<(x.occ||1);k++){from=t.indexOf(o,from+1);if(from<0)break}
+  if(from>=0)(byP[x.p]=byP[x.p]||[]).push({...x,a:from,b:from+o.length})});
+ let html='';
+ paras.forEach((pr,pi)=>{const L=(byP[pi]||[]).sort((a,b)=>a.a-b.a);let pos=0,h='';
+  L.forEach(x=>{if(x.a<pos)return;const n=++id;I.push({id:n,cat:x.cat,o:x.o,s:x.s,w:Array.isArray(x.w)&&x.w.length?x.w.map(String):['Suggested by the analysis.'],st:'open',p:pi,kind:x.kind});pr.has=1;
+   h+=esc(pr.t.slice(pos,x.a))+`<span class="is" tabindex="0" data-id="${n}" data-cat="${x.cat}" data-k="${x.kind||'style'}" aria-label="${CATS[x.cat][1]} issue">${esc(x.o)}</span>`;pos=x.b});
+  h+=esc(pr.t.slice(pos));
+  const tg=pr.tag=='h2'?(pi==0?'h1':'h2'):'p';html+=`<${tg} data-p="${pi}" data-k="${pr.tag}">${pr.tag=='li'?'• ':''}${h}</${tg}>`});
+ doc.innerHTML=html;doc.scrollTop=0;sel=(I.find(vis)||I[0]||{id:null}).id;filt=null;stack=[];tourTarget=null;$('#rj').disabled=false;
+ // thumbnails from the real content: one per PDF page, or per ~2200 characters
+ const G=[];let cur=null,len=0;paras.forEach((pr,pi)=>{if(!cur||(pr.page?pr.page!=cur.pg:len>2200)){cur={s:pi,pg:pr.page,ps:[]};G.push(cur);len=0}cur.ps.push(pr);len+=pr.t.length});
+ $('#th').innerHTML=G.map((gp,n)=>`<div class="th ${n?'':'on'}" data-p="${gp.s}" role="button" tabindex="0" aria-label="Page ${n+1}">${gp.ps.slice(0,9).map(p=>`<i style="width:${Math.min(100,30+p.t.length/5)}%;${p.has?'background:#c9a227':''}"></i>`).join('')}</div><div class="tn">${n+1}</div>`).join('');
+ render()}
+$('#an').onclick=async()=>{
+ if(busy)return;if(!DOCM)return toast('Upload a document first. The demo issues are preloaded samples.');
+ const sample={json:async p=>{
+  if(CFG.cloud&&!window.__okCloud){if(!confirm(`Privacy notice: your document text will be sent to ${CFG.provider}, a cloud service, for this check. Continue?`))throw Object.assign(new Error('Cancelled. Nothing was sent.'),{code:'not_granted'});window.__okCloud=1}
+  const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})}),j=await r.json();
+  if(!r.ok){const e=new Error(j.error||'Analysis failed');if(r.status==503)e.code='not_granted';throw e}
+  if(!Array.isArray(j.items))throw Error('The AI answer was unreadable: '+(j.parse_error||'unknown reason'));return j.items}};
+ const paras=DOCM.paras,B=[];let cur=[],len=0;paras.forEach((p,i)=>{if(len>5000){B.push(cur);cur=[];len=0}cur.push(i);len+=p.t.length});if(cur.length)B.push(cur);
+ busy=true;hSt('Analyzing…');const all=[];let fail=0;
+ try{for(let b=0;b<B.length;b++){$('#sm').textContent=`Analyzing: batch ${b+1} of ${B.length}`;$('#pb').style.width=b/B.length*100+'%';
+  const txt=B[b].map(i=>`[${i}] ${paras[i].t}`).join('\n\n');
+  const prompt=`You are a careful academic copy-editor. Below are paragraphs from a research paper, each prefixed with [index]. Find genuine writing issues. Return ONLY a JSON array. Each item: {"p":paragraph index,"o":exact substring copied from that paragraph (at most 12 words),"occ":which occurrence of o in the paragraph (1 if unique),"cat":"gram"|"clar"|"style"|"rep"|"cit"|"str","s":replacement text for o only,"w":[one or two short reasons]}. Categories: gram=grammar/spelling, clar=vague or unclear wording, style=informal or non-academic tone, rep=repetition/redundancy, cit=citation formatting or reference consistency, str=transitions/structure/flow. Rules: keep the author's meaning; never invent data, results, sources or citations; never make a claim stronger; do not touch equations or numbers; for citation items only flag formatting problems, never claim a source was verified; at most 8 items per paragraph; return [] if there are no issues.\n\n${txt}`;
+  try{const r=await sample.json(prompt,{modelTier:'default',cache:false});if(Array.isArray(r))all.push(...r)}catch(e){fail++;if(e&&e.code=='not_granted')throw e;console.warn(e)}}
+  MODE='AI check';const v=await validateIssues(paras,all);buildDoc(paras,v.issues);reportRejected(v,'AI'+(fail?` (${fail} batch(es) failed)`:''));hSt(I.length?'Analyzed ✓':'Analyzed');
+  toast(I.length?`Found ${I.length} issues. Review each one before accepting.`:fail?'Analysis failed. Try again.':'No issues found. This is not a guarantee the paper is correct.')}
+ catch(e){hSt('Parsed ✓');note('AI','✗ '+String(e&&e.message||e).slice(0,140));toast('Analysis stopped: '+(e&&e.message||e))}
+ busy=false;render()};
+$('#ex').onclick=async()=>{const d=window.claude?await claude.use('downloads'):null;if(!d)return toast('Export is unavailable in this view.');
+ const md=getRevised().map(p=>(p.h=='H1'?'# ':p.k=='h2'?'## ':p.k=='li'?'- ':'')+p.t).filter(Boolean).join('\n\n')+'\n';
+ const base=(DOCM?DOCM.name:'research_paper').replace(/\.[^.]+$/,'');
+ try{await d.save({filename:base+'_revised.md',data:new Blob([md],{type:'text/markdown'})});toast('Saved revised text (Markdown). DOCX export needs the full project.')}catch(e){if(e&&e.code!='declined')toast('Export failed: '+(e.message||e))}};
+// ===== Free quick check: rule-based, offline, no account or key =====
+const PHR={'in order to':['to','Wordy: "to" means the same.','clar'],'due to the fact that':['because','Wordy; "because" is shorter.','clar'],'a number of':['several','Imprecise quantity; give a number if you can.','clar'],'a lot of':['many','Informal quantity. Use "many"/"much" or a measure.','style'],'kind of':['somewhat','Informal hedge.','style'],'sort of':['somewhat','Informal hedge.','style'],'in this day and age':['currently','Cliché.','style'],'proves':['shows','Strong claim: check that your evidence supports it.','clar']};
+const MIS={teh:'the',recieve:'receive',seperate:'separate',occured:'occurred',definately:'definitely',wich:'which',adress:'address',begining:'beginning',enviroment:'environment',accomodate:'accommodate',untill:'until',thier:'their',becuase:'because',goverment:'government',alot:'a lot',occurence:'occurrence',independant:'independent',neccessary:'necessary',sucessful:'successful'};
+const CON={"don't":'do not',"doesn't":'does not',"didn't":'did not',"can't":'cannot',"won't":'will not',"isn't":'is not',"aren't":'are not',"wasn't":'was not',"weren't":'were not',"it's":'it is',"they're":'they are',"we're":'we are',"couldn't":'could not',"shouldn't":'should not',"wouldn't":'would not'};
+function quickCheck(paras){
+ const out=[],cap=(s,m)=>/^[A-Z]/.test(m)&&/^[a-z]/.test(s)?s[0].toUpperCase()+s.slice(1):s,
+ occN=(t,o,idx)=>{let k=0,p=-1;do{p=t.indexOf(o,p+1);k++}while(p>=0&&p<idx);return k};
+ paras.forEach((pr,pi)=>{if(pr.tag=='h2'||!isProse(pr.t))return;const t=pr.t;
+  const add=(m,idx,cat,s,w)=>out.push({p:pi,o:m,occ:occN(t,m,idx),cat,s,w:[w]});
+  const run=(re,fn)=>{let m;re.lastIndex=0;while((m=re.exec(t))){fn(m,m.index);if(m[0]==='')re.lastIndex++}};
+  run(new RegExp('\\b('+Object.keys(PHR).join('|')+')\\b','gi'),(m,i)=>{const r=PHR[m[0].toLowerCase()];add(m[0],i,r[2],cap(r[0],m[0]),r[1])});
+  run(/\b(very|really)\s+([a-z]{3,})\b/gi,(m,i)=>add(m[0],i,'clar',m[2],'Intensifier adds little; use a precise word or a measurable result.'));
+  run(new RegExp('\\b('+Object.keys(MIS).join('|')+')\\b','gi'),(m,i)=>add(m[0],i,'gram',cap(MIS[m[0].toLowerCase()],m[0]),'Likely misspelling.'));
+  run(/\b[A-Za-z]+[’'](?:t|s|re)\b/g,(m,i)=>{const c=CON[m[0].toLowerCase().replace('’',"'")];if(c)add(m[0],i,'style',cap(c,m[0]),'Contractions are usually avoided in academic writing.')});
+  run(/\b([A-Za-z]+)\s+\1\b/gi,(m,i)=>{if(m[1].length>1)add(m[0],i,'gram',m[1],'Repeated word. Check it is not intentional.')});
+  run(/(?:^|[.!?]\s)(And|But|So|Also)\s/g,(m,i)=>{const o=m[1],r={And:'In addition,',But:'However,',So:'Therefore,',Also:'In addition,'}[o];add(o,i+m[0].indexOf(o),'str',r,'Informal sentence opener. Check the logical link to the previous sentence.')});
+  run(/\(([A-Z][A-Za-z-]+(?:\set al\.?|\sand\s[A-Z][A-Za-z-]+)?)\s(\d{4}[a-z]?)\)/g,(m,i)=>add(m[0],i,'cit',`(${m[1]}, ${m[2]})`,'Author-year citations normally put a comma before the year. Check your required style. Not verified against any source.'));
+  run(/\bet al(?!\.)/g,(m,i)=>add(m[0],i,'cit','et al.','"et al." needs a period.'));
+  run(/\b(obviously|clearly|undoubtedly|always|never)\b/gi,(m,i)=>add(m[0],i,'clar',m[0],'Strong or absolute wording. Check the evidence supports it, or soften it.'));
+  run(/[^.!?]+[.!?]/g,(m,i)=>{const s=m[0].trim(),w=s.split(/\s+/);if(w.length>55&&w.length<=150){const o=(s.match(/^(?:\S+\s+){7}\S+/)||[w.slice(0,8).join(' ')])[0],at=t.indexOf(o,i);if(at>=0)add(o,at,'clar',o,`Very long sentence (${w.length} words). Consider splitting it.`)}});
+ });return out}
+$('#qc').onclick=async()=>{if(busy)return;if(!DOCM)return toast('Upload a document first. The demo issues are preloaded samples.');
+ const cs=await citeCheck();const v=await validateIssues(DOCM.paras,quickCheck(DOCM.paras).concat(cs?cs.issues:[]));MODE='Quick check';buildDoc(DOCM.paras,v.issues);reportRejected(v,'Quick');citeNote(cs);hSt(I.length?'Checked ✓':'Checked');
+ toast(I.length?`Quick check found ${I.length} issues. It uses simple rules, not AI, so it misses subtle problems.`:'Quick check found nothing. That does not mean the paper is error-free.')};
+// every issue in one scrollable list, in document order, each with a Fix button
+function renderList(){
+ const L=list().slice().sort((a,b)=>{if(a.p!=null&&b.p!=null&&(a.p!=b.p||a.a!=null))return a.p-b.p||(a.a||0)-(b.a||0);const x=el(a.id),y=el(b.id);return x&&y&&(x.compareDocumentPosition(y)&2)?1:-1});
+ $('#tc2').textContent=L.length;renderKf();
+ $('#il').innerHTML=!L.length?'<div class="em">No issues to show yet.</div>':L.map(i=>{const ch=i.s!==i.o;
+  return `<div class="ir${i.id==sel?' on':''}${i.st!='open'?' dn':''}" data-id="${i.id}" tabindex="0" style="--c:var(--c-${i.cat})"><span class="d"></span><div class="tx"><div class="o">${esc(i.o0||i.o)}${ch&&i.st!='acc'?' → <b>'+esc(i.s)+'</b>':''}</div><div class="w">${DOCM&&DOCM.mode=='pdf'&&i.p!=null&&DOCM.paras[i.p]?'p.'+DOCM.paras[i.p].page+' · ':''}${CATS[i.cat][0]}: ${esc(i.w[0]||'')}</div></div>${i.st=='open'&&ch?`<button class="fx" data-fix="${i.id}">Fix</button>`:i.st=='acc'?'<span class="stt">'+(ch?'Fixed':'Reviewed')+'</span>':i.st=='rej'?'<span class="stt">'+(ch?'Kept':'Dismissed')+'</span>':''}</div>`}).join('');
+ const on=$('#il .on');if(on&&window.__ls!==sel){window.__ls=sel;const a=on.getBoundingClientRect(),b=$('#il').getBoundingClientRect();if(a.top<b.top||a.bottom>b.bottom)$('#il').scrollTop+=a.top-b.top-40}}
+$('#il').onclick=e=>{const f=e.target.closest('[data-fix]');if(f){select(+f.dataset.fix,false);$('#ac').click();return}const r=e.target.closest('.ir');if(r)select(+r.dataset.id,true)};
+$('#il').onkeydown=e=>{if(e.key=='Enter'){const r=e.target.closest('.ir');if(r)select(+r.dataset.id,true)}};
+// ===== Faithful viewers: PDF pages (PDF.js canvas + text layer) and formatted DOCX (Mammoth) =====
+const LIBU={mammoth:['/vendor/mammoth.js','https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js'],pdf:['/vendor/pdf.min.js','https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js']},LIBSRC={};
+async function lib(k){const g=k=='pdf'?'pdfjsLib':'mammoth';if(window[g])return;
+ for(const u of LIBU[k]){try{await new Promise((r,j)=>{const s=document.createElement('script');s.src=u;s.onload=r;s.onerror=j;document.head.appendChild(s)});if(window[g]){LIBSRC[k]=u;return}}catch(e){}}
+ throw Error('Could not load the '+k+' reader (needs internet once, or run scripts/get_vendor.py)')}
+const blocks=r=>[...r.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li')].filter(b=>b.textContent.trim());
+const pcs=id=>[...doc.querySelectorAll('[data-id="'+id+'"]')].map(e=>e.classList.contains('hb')?null:e.textContent);
+function setPcs(id,t){[...doc.querySelectorAll('[data-id="'+id+'"]')].forEach((e,k)=>{if(!e.classList.contains('hb'))e.textContent=t[k]!=null?t[k]:''})}
+function reveal(id){const e=el(id);if(e)return e.scrollIntoView({block:'center',behavior:'smooth'});
+ const it=I.find(x=>x.id==id),P=it&&DOCM&&DOCM.mode=='pdf'&&DOCM.pg&&DOCM.pg[DOCM.paras[it.p].page];if(P)P.w.scrollIntoView({block:'start',behavior:'smooth'})}
+let rt;const laterRender=()=>{clearTimeout(rt);rt=setTimeout(render,80)};
+window.onZoom=()=>{if(DOCM&&DOCM.mode=='pdf')setupPdfPages(true)};
+function sanitize(html){const d=new DOMParser().parseFromString(html,'text/html');d.querySelectorAll('script,style,iframe,object,embed,link,meta').forEach(n=>n.remove());
+ d.body.querySelectorAll('*').forEach(n=>{[...n.attributes].forEach(a=>{if(/^on/i.test(a.name))n.removeAttribute(a.name)});if(n.tagName=='A'&&!/^(https?:|mailto:|#)/i.test(n.getAttribute('href')||''))n.removeAttribute('href')});return d.body}
+async function loadDocx(f){await lib('mammoth');const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()}),html=sanitize(r.value).innerHTML,tmp=new DOMParser().parseFromString(html,'text/html').body;
+ const paras=blocks(tmp).map(x=>({t:x.textContent,tag:/^H/.test(x.tagName)?'h2':x.tagName=='LI'?'li':'p'}));if(!paras.length)throw Error('No text found in this file.');return{paras,mode:'docx',html}}
+async function loadPdf(f){await lib('pdf');pdfjsLib.GlobalWorkerOptions.workerSrc=LIBSRC.pdf?LIBSRC.pdf.replace('pdf.min.js','pdf.worker.min.js'):PDFW;
+ const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise,paras=[];
+ for(let pg=1;pg<=pdf.numPages;pg++){const c=await(await pdf.getPage(pg)).getTextContent(),lines=[];let y=null,cur='';
+  c.items.forEach(it=>{const yy=Math.round(it.transform[5]);if(y!==null&&Math.abs(yy-y)>3){lines.push(cur);cur=''}y=yy;cur+=it.str});lines.push(cur);
+  let buf='';lines.forEach(l=>{l=l.trim();if(!l)return;if(!buf&&l.length<80&&!/[.!?,;]$/.test(l)){paras.push({t:l,tag:'h2',page:pg});return}
+   buf+=(buf?' ':'')+l;if((/[.!?]$/.test(l)&&buf.length>120)||buf.length>800){paras.push({t:buf,tag:'p',page:pg});buf=''}});if(buf)paras.push({t:buf,tag:'p',page:pg})}
+ if(paras.map(p=>p.t).join('').length<100){const e=new Error('No selectable text found. This looks like a scanned PDF and needs OCR, which is not built in.');e.scanned=1;throw e}
+ return{paras,mode:'pdf',pdf}}
+function wrapRange(block,a,b,it){let pos=0;const w=document.createTreeWalker(block,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);
+ for(const n of ns){const len=n.nodeValue.length,s=Math.max(a-pos,0),e=Math.min(b-pos,len);
+  if(s<e){const mid=n.splitText(s);mid.splitText(e-s);const sp=document.createElement('span');sp.className='is';sp.dataset.id=it.id;sp.dataset.cat=it.cat;sp.dataset.k=it.kind||'style';sp.tabIndex=0;sp.setAttribute('aria-label',CATS[it.cat][1]+' issue');mid.parentNode.replaceChild(sp,mid);sp.appendChild(mid)}
+  pos+=len;if(pos>=b)break}}
+function resolve(paras,iss){I.length=0;let id=0;const by={};paras.forEach(p=>p.has=0);
+ iss.forEach(x=>{const t=paras[x.p]&&paras[x.p].t,o=x.o;if(!t||!o||typeof x.s!='string'||!CATS[x.cat])return;let f=-1;for(let k=0;k<(x.occ||1);k++){f=t.indexOf(o,f+1);if(f<0)break}if(f>=0)(by[x.p]=by[x.p]||[]).push({...x,a:f,b:f+o.length})});
+ Object.keys(by).forEach(pi=>{let pos=0;by[pi].sort((a,b)=>a.a-b.a).forEach(x=>{if(x.a<pos)return;I.push({id:++id,cat:x.cat,o:x.o,s:x.s,w:Array.isArray(x.w)&&x.w.length?x.w.map(String):['Suggested by the analysis.'],st:'open',p:+pi,kind:x.kind,a:x.a,b:x.b,occ:x.occ||1});paras[pi].has=1;pos=x.b})})}
+function docThumbs(paras){const G=[];let cur=null,len=0;paras.forEach((p,i)=>{if(!cur||len>2200){cur={s:i,ps:[]};G.push(cur);len=0}cur.ps.push(p);len+=p.t.length});
+ $('#th').innerHTML=G.map((g,n)=>`<div class="th ${n?'':'on'}" data-p="${g.s}" role="button" tabindex="0" aria-label="Page ${n+1}">${g.ps.slice(0,9).map(p=>`<i style="width:${Math.min(100,30+p.t.length/5)}%;${p.has?'background:#c9a227':''}"></i>`).join('')}</div><div class="tn">${n+1}</div>`).join('')}
+function buildView(paras,iss){resolve(paras,iss);const D=DOCM;
+ if(D.mode=='docx'){doc.innerHTML=D.html;const bl=blocks(doc);bl.forEach((b,i)=>{if(paras[i]){b.dataset.p=i;b.dataset.k=paras[i].tag}});I.forEach(it=>{if(bl[it.p])wrapRange(bl[it.p],it.a,it.b,it)});doc.scrollTop=0;docThumbs(paras)}
+ else{if(D.editing)endEdit(true);if(D.pg&&D.pg.length)D.pg.forEach((P,n)=>{if(P&&P.done)placePg(n)});else{setupPdfPages();pdfThumbs()}}
+ sel=(I.find(vis)||I[0]||{id:null}).id;filt=null;stack=[];tourTarget=null;$('#rj').disabled=false;render()}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)renderPg(+e.target.dataset.pg)}),{root:doc,rootMargin:'800px 0px'});
+async function setupPdfPages(keep){const D=DOCM;if(!D||D.mode!='pdf')return;const tok=D.tok=(D.tok||0)+1;
+ let anchor=null;   // remember where you are so zoom does not send you back to the top
+ if(keep&&D.pg&&D.pg.length){const dt=doc.getBoundingClientRect().top;for(let n=1;n<D.pg.length;n++){const P=D.pg[n];if(!P)continue;const r=P.w.getBoundingClientRect();if(r.bottom>dt+4){anchor={n,f:Math.max(0,(dt-r.top)/r.height),x:doc.scrollLeft/Math.max(1,doc.scrollWidth)};break}}}
+ doc.innerHTML='';D.pg=[];D.pages=D.pages||[];D.base=D.base||[];const wpx=Math.max(300,doc.clientWidth-112);
+ for(let n=1;n<=D.pdf.numPages;n++){
+  if(!D.base[n]){const page=await D.pdf.getPage(n);if(D.tok!=tok)return;D.pages[n]=page;const v=page.getViewport({scale:1});D.base[n]=[v.width,v.height]}
+  const[bw,bh]=D.base[n],sc=Math.min(2,wpx/bw)*z,w=document.createElement('div');w.className='pdfpg';w.dataset.pg=n;w.style.cssText=`width:${bw*sc}px;height:${bh*sc}px`;doc.appendChild(w);D.pg[n]={w,sc,done:0};io.observe(w)}
+ if(anchor&&D.pg[anchor.n]){doc.style.scrollBehavior='auto';const P=D.pg[anchor.n];doc.scrollTop=P.w.offsetTop+anchor.f*P.w.offsetHeight;doc.scrollLeft=anchor.x*doc.scrollWidth;requestAnimationFrame(()=>doc.style.scrollBehavior='')}}
+async function renderPg(n){const D=DOCM,P=D&&D.pg&&D.pg[n];if(!P||P.done)return;P.done=1;
+ try{const w=P.w,page=D.pages[n]||(D.pages[n]=await D.pdf.getPage(n)),vp=page.getViewport({scale:P.sc}),cv=document.createElement('canvas'),r=devicePixelRatio||1;cv.width=vp.width*r;cv.height=vp.height*r;cv.style.cssText='width:100%;height:100%;display:block';w.appendChild(cv);
+  await page.render({canvasContext:cv.getContext('2d'),viewport:vp,transform:r!=1?[r,0,0,r,0,0]:null}).promise;
+  const tl=document.createElement('div');tl.className='textLayer';tl.style.setProperty('--scale-factor',vp.scale);w.appendChild(tl);
+  const tc=await page.getTextContent();await pdfjsLib.renderTextLayer({textContent:tc,textContentSource:tc,container:tl,viewport:vp,textDivs:[]}).promise;
+  const hl=document.createElement('div');hl.className='hlayer';w.appendChild(hl);P.hl=hl;placePg(n)}catch(e){console.warn('page',n,e)}}
+// find each issue on the rendered page and draw boxes over the exact words (issues it cannot find stay in the list only)
+function placePg(n){const D=DOCM,P=D.pg&&D.pg[n];if(!P||!P.hl)return;P.hl.innerHTML='';
+ const sp=[...P.w.querySelectorAll('.textLayer span')].filter(s=>s.firstChild&&s.firstChild.nodeType==3);let N='';const M=[];
+ sp.forEach((s,si)=>{const t=s.textContent;for(let k=0;k<t.length;k++){if(/\s/.test(t[k])){if(N&&N[N.length-1]!=' '){N+=' ';M.push([si,k])}}else{N+=t[k];M.push([si,k])}}if(N&&N[N.length-1]!=' '){N+=' ';M.push([si,Math.max(0,t.length-1)])}});
+ const nrm=s=>s.replace(/\s+/g,' ').trim(),wr=P.w.getBoundingClientRect();
+ I.forEach(it=>{if(D.paras[it.p].page!=n)return;const pn=nrm(D.paras[it.p].t),on=nrm(it.o);if(!on)return;const st=N.indexOf(pn.slice(0,40));if(st<0)return;
+  let f=st,pos=-1;for(let k=0;k<it.occ;k++){pos=N.indexOf(on,f);if(pos<0)return;f=pos+1}
+  const a=M[pos],b=M[pos+on.length-1];if(!a||!b)return;const r=document.createRange();r.setStart(sp[a[0]].firstChild,a[1]);r.setEnd(sp[b[0]].firstChild,b[1]+1);
+  [...r.getClientRects()].forEach(q=>{if(q.width<1)return;const d=document.createElement('span');d.className='is hb';d.dataset.id=it.id;d.dataset.cat=it.cat;d.dataset.k=it.kind||'style';d.tabIndex=0;d.setAttribute('aria-label',CATS[it.cat][1]+' issue');
+   d.style.cssText=`left:${q.left-wr.left}px;top:${q.top-wr.top}px;width:${q.width}px;height:${q.height}px`;P.hl.appendChild(d)})});
+ laterRender()}
+async function pdfThumbs(){const D=DOCM;$('#th').innerHTML=Array.from({length:D.pdf.numPages},(_,i)=>`<div class="th pg ${i?'':'on'}" data-pg="${i+1}" role="button" tabindex="0" aria-label="Page ${i+1}"><canvas></canvas></div><div class="tn">${i+1}</div>`).join('');
+ const cs=[...$('#th').querySelectorAll('canvas')];for(let i=0;i<Math.min(cs.length,80);i++){try{const pg=await D.pdf.getPage(i+1),v=pg.getViewport({scale:66/pg.getViewport({scale:1}).width});cs[i].width=v.width;cs[i].height=v.height;await pg.render({canvasContext:cs[i].getContext('2d'),viewport:v}).promise}catch(e){}}}
+$('#th').onclick=e=>{const t=e.target.closest('.th');if(!t)return;document.querySelectorAll('.th').forEach(x=>x.classList.toggle('on',x==t));
+ if(t.dataset.pg&&DOCM&&DOCM.pg&&DOCM.pg[+t.dataset.pg])return DOCM.pg[+t.dataset.pg].w.scrollIntoView({behavior:'smooth',block:'start'});
+ const b=t.dataset.p!==undefined&&doc.querySelector('[data-p="'+t.dataset.p+'"]');
+ doc.scrollTo({top:b?b.getBoundingClientRect().top-doc.getBoundingClientRect().top+doc.scrollTop-30:(anchors[+t.dataset.n]?anchors[+t.dataset.n]():0),behavior:'smooth'})};
+function getRevised(){if(DOCM&&DOCM.mode=='pdf'){if(DOCM.edited)return DOCM.paras.map((p,pi)=>({t:DOCM.edited[pi]!=null?DOCM.edited[pi]:p.t,k:p.tag,h:pi==0&&p.tag=='h2'?'H1':p.tag=='h2'?'H2':'P'}));const ed={};I.filter(i=>i.st=='acc'&&i.p!=null).forEach(i=>(ed[i.p]=ed[i.p]||[]).push(i));
+  return DOCM.paras.map((p,pi)=>{let t=p.t;(ed[pi]||[]).sort((a,b)=>b.a-a.a).forEach(i=>{t=t.slice(0,i.a)+i.s+t.slice(i.b)});return{t,k:p.tag,h:pi==0&&p.tag=='h2'?'H1':p.tag=='h2'?'H2':'P'}})}
+ const bl=[...doc.querySelectorAll('[data-p]')];return(bl.length?bl:[...doc.children]).map(e=>({t:e.textContent.replace(/^• /,'').trim(),k:e.dataset.k||(/^H/.test(e.tagName)?'h2':'p'),h:e.tagName}))}
+fi.onchange=async()=>{const f=fi.files[0];fi.value='';if(!f)return;if(busy)return toast('Wait for the current check to finish.');const n=f.name.toLowerCase();hSt('Parsing…');
+ try{let D=null,why='';
+  if(n.endsWith('.docx')){try{D=await loadDocx(f)}catch(e){why=e.message;console.warn(e)}}
+  else if(n.endsWith('.pdf')){try{D=await loadPdf(f)}catch(e){if(e.scanned)throw e;why=e.message;console.warn(e)}}
+  if(!D){const paras=await readFile(f);if(!paras){hSt('Demo ✓');return}D={paras,mode:'text'};if(why)toast('Page view unavailable ('+why+'). Showing plain text instead.')}
+  DOCM={name:f.name,...D};MODE='Uploaded';$('#fn').textContent='▯ '+f.name;buildDoc(D.paras,[]);hSt('Parsed ✓');setTimeout(()=>$('#qc').click(),150)}
+ catch(e){console.error(e);hSt('Error');toast('Could not read this file: '+(e.message||e))}};
+// ===== validation, privacy notice, checks-run log, grammar, DOCX export =====
+let CFG={provider:'unknown',cloud:false};fetch('/api/config').then(r=>r.json()).then(j=>CFG=j).catch(()=>{});
+const CHK={};function note(k,v){CHK[k]=v;$('#ck').textContent='Checks run: '+Object.entries(CHK).map(([a,b])=>a+' '+b).join(' · ')}
+async function validateIssues(paras,items){const r=await fetch('/api/validate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paras:paras.map(p=>p.t),items})}),j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||'Validation failed');return j}
+function reportRejected(v,name){const n=(v.rejected||[]).length;note(name,`✓ ${v.issues.length} kept, ${n} discarded`);if(n){console.table(v.rejected.map(x=>({reason:x.reason,text:x.item&&x.item.o})));toast(`${n} suggestion(s) discarded by validation (not locatable, unsafe or overlapping).`)}}
+$('#gc').onclick=async()=>{if(busy)return;if(!DOCM)return toast('Upload a document first. The demo issues are preloaded samples.');
+ busy=true;hSt('Checking…');$('#pb').style.width='40%';$('#sm').textContent='Grammar check running (the first run downloads the grammar engine)…';
+ try{const r=await fetch('/api/grammar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paras:DOCM.paras.map(p=>p.tag=='h2'||!isProse(p.t)?'':p.t)})}),j=await r.json().catch(()=>({}));
+  if(!r.ok)throw Error(j.error||'Grammar check failed');
+  const cs=await citeCheck();const v=await validateIssues(DOCM.paras,[...j.issues,...quickCheck(DOCM.paras),...(cs?cs.issues:[])]);MODE='Grammar check';buildDoc(DOCM.paras,v.issues);reportRejected(v,'Grammar');citeNote(cs);hSt(I.length?'Checked ✓':'Checked');
+  toast(I.length?`Found ${I.length} issues. Review each one: automatic checkers make mistakes.`:'No issues found. That does not mean the paper is error-free.')}
+ catch(e){hSt('Parsed ✓');note('Grammar','✗ '+String(e.message||e).slice(0,140));toast('Grammar check stopped: '+(e.message||e))}
+ busy=false;render()};
+function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+$('#ed').onclick=async()=>{const ps=getRevised().filter(p=>p.t);
+ if(!ps.length||!DOCM)return toast('Upload a document first. The demo has no source file to export.');
+ const r=await fetch('/api/export-docx',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paras:ps})});
+ if(!r.ok){const j=await r.json().catch(()=>({}));return toast(j.error||'DOCX export failed')}
+ download(DOCM.name.replace(/\.[^.]+$/,'')+'_revised.docx',await r.blob());toast(r.headers.get('X-Format-Notes')||'Exported.')};
+// ===== trust + visibility: what changed, why, history, kind filters, no surprise scrolling =====
+let JUMP=false,jh=0;function jumpHint(){if(!jh++)toast('Staying where you are. Use the magnifier button, or turn on "Jump", to scroll to it.')}
+const showK={error:true,style:true,check:true,review:false},KN={error:'Likely errors',style:'Optional style',check:'Citation checks',review:'Review only'};
+const vis=i=>showK[i.kind||'style']!==false;
+doc.classList.add('hide-review');
+$('#sj').onclick=e=>{e.currentTarget.classList.toggle('on');JUMP=e.currentTarget.classList.contains('on')};
+function renderKf(){const c={error:0,style:0,check:0,review:0};I.filter(i=>i.st=='open').forEach(i=>c[i.kind||'style']++);
+ $('#kf').innerHTML=Object.keys(KN).map(k=>`<button class="kc${showK[k]?' on':''}" data-k="${k}" aria-pressed="${showK[k]}">${KN[k]} ${c[k]}</button>`).join('')}
+$('#kf').onclick=e=>{const b=e.target.closest('.kc');if(!b)return;showK[b.dataset.k]=!showK[b.dataset.k];
+ doc.classList.toggle('hide-review',!showK.review);doc.classList.toggle('hide-style',!showK.style);doc.classList.toggle('hide-error',!showK.error);doc.classList.toggle('hide-check',!showK.check);
+ if(!I.find(x=>x.id==sel&&vis(x))){const f=I.find(vis);if(f)sel=f.id}render()};
+const HIST=[];
+function logH(i,a){const p=DOCM&&DOCM.paras&&i.p!=null?DOCM.paras[i.p]:null;HIST.unshift({t:new Date(),id:i.id,a,o:i.o0||i.o,s:i.s,cat:i.cat,pg:p&&p.page,same:i.s===i.o});renderHist();say(a+': '+(i.o0||i.o)+(i.s===i.o?'':' to '+i.s))}
+function renderHist(){$('#hc').textContent=HIST.length;
+ $('#hist').innerHTML=HIST.length?HIST.map((h,k)=>`<div class="ir" data-h="${k}" style="--c:var(--c-${h.cat})"><span class="d"></span><div class="tx"><div class="o">${esc(h.o)}${h.same?'':' → <b>'+esc(h.s)+'</b>'}</div><div class="w">${h.t.toLocaleTimeString()} · ${h.a}${h.pg?' · page '+h.pg:''}</div></div></div>`).join(''):'<div class="em">No changes yet. Accepted, rejected and undone suggestions are listed here.</div>'}
+$('#hist').onclick=e=>{const r=e.target.closest('[data-h]');if(r){select(HIST[+r.dataset.h].id,false);reveal(HIST[+r.dataset.h].id)}};
+// only judge real sentences: tables, headings and page headers are not prose
+function isProse(t){const w=t.trim().split(/\s+/);if(w.length<5)return false;return w.filter(x=>/^[(\[]?[A-Za-z][A-Za-z'’-]*[.,;:)\]?!]*$/.test(x)).length/w.length>=.7}
+async function loadPdf(f){await lib('pdf');pdfjsLib.GlobalWorkerOptions.workerSrc=LIBSRC.pdf?LIBSRC.pdf.replace('pdf.min.js','pdf.worker.min.js'):PDFW;
+ const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise,pages=[];
+ for(let pg=1;pg<=pdf.numPages;pg++){const c=await(await pdf.getPage(pg)).getTextContent(),lines=[];let y=null,cur='';
+  c.items.forEach(it=>{const yy=Math.round(it.transform[5]);if(y!==null&&Math.abs(yy-y)>3){lines.push(cur);cur=''}y=yy;cur+=it.str});lines.push(cur);pages.push(lines.map(l=>l.trim()).filter(Boolean))}
+ const sig=l=>l.replace(/\d+/g,'#').replace(/\s+/g,' ').toLowerCase(),cnt={};   // running headers/footers repeat on many pages
+ pages.forEach(L=>new Set([...L.slice(0,2),...L.slice(-2)].map(sig)).forEach(k=>cnt[k]=(cnt[k]||0)+1));
+ const lim=Math.max(3,Math.ceil(pdf.numPages*.3)),paras=[];
+ pages.forEach((L,i)=>{const pg=i+1;let buf='';const flush=()=>{if(buf){paras.push({t:buf,tag:'p',page:pg});buf=''}};
+  L.forEach((l,k)=>{const edge=k<2||k>=L.length-2;if(l.length<6&&/^(\d+|[ivxlc]+)$/i.test(l))return;if(edge&&cnt[sig(l)]>=lim)return;
+   if(l.length<90&&!/[.!?,;:]$/.test(l)&&(/^(\d+(\.\d+)*|chapter|appendix)\s+\S/i.test(l)||!buf)){flush();paras.push({t:l,tag:'h2',page:pg});return}
+   buf+=(buf?' ':'')+l;if((/[.!?]$/.test(l)&&buf.length>120)||buf.length>800)flush()});flush()});
+ if(paras.map(p=>p.t).join('').length<100){const e=new Error('No selectable text found. This looks like a scanned PDF and needs OCR, which is not built in.');e.scanned=1;throw e}
+ return{paras,mode:'pdf',pdf}}
+// citation consistency (server side): in-text author-year citations vs the reference list
+async function citeCheck(){try{const r=await fetch('/api/citations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paras:DOCM.paras.map(p=>({t:p.t,tag:p.tag}))})});return r.ok?await r.json():null}catch(e){return null}}
+function citeNote(cs){if(!cs){note('Citations','not run');return}const s=cs.summary;
+ note('Citations',s.references?`${s.citations} cited · ${s.references} references · ${s.missing} missing · ${s.year_mismatch} year mismatch · ${s.ambiguous} ambiguous · ${s.uncited} uncited`:(cs.notes[0]||'no reference list'));
+ if(cs.issues.length)toast(`Citation check: ${cs.issues.length} item(s) to review. This compares your text with your own reference list; it does not verify sources.`)}
+// ===== Milestone 5: review summary, settings, keyboard shortcuts, announcements =====
+const live=$('#live'),dlg=$('#dlg');function say(m){live.textContent='';setTimeout(()=>live.textContent=m,30)}
+function annSel(id){const i=I.find(x=>x.id==id),L=list();if(i)say(`Issue ${L.indexOf(i)+1} of ${L.length}. ${CATS[i.cat][0]}. ${i.o}${i.s!==i.o?', suggested: '+i.s:', review only'}`)}
+const pgOf=i=>DOCM&&DOCM.paras&&i.p!=null&&DOCM.paras[i.p]&&DOCM.paras[i.p].page?'p.'+DOCM.paras[i.p].page+': ':'';
+function stats(){const s={found:I.length,acc:0,rev:0,rej:0,dis:0,open:0},bc={};Object.keys(CATS).forEach(c=>bc[c]={found:0,acc:0,rej:0,open:0});
+ I.forEach(i=>{const ch=i.s!==i.o,b=bc[i.cat];b.found++;if(i.st=='acc'){ch?s.acc++:s.rev++;b.acc++}else if(i.st=='rej'){ch?s.rej++:s.dis++;b.rej++}else{s.open++;b.open++}});return{s,bc}}
+const changes=()=>I.filter(i=>i.st=='acc'&&i.s!==i.o);
+function summaryHtml(){const{s,bc}=stats();
+ return `<p>${s.found?`${s.found-s.open} of ${s.found} suggestions reviewed.`:'No issues yet. Run a check first.'}</p><ul><li>Accepted fixes: <b>${s.acc}</b></li><li>Marked reviewed (no text change): <b>${s.rev}</b></li><li>Rejected: <b>${s.rej}</b></li><li>Dismissed: <b>${s.dis}</b></li><li>Still open: <b>${s.open}</b></li></ul>
+<table class="st"><tr><th>Category</th><th>Found</th><th>Accepted</th><th>Rejected</th><th>Open</th></tr>${Object.entries(bc).map(([c,b])=>`<tr><td>${CATS[c][0]}</td><td>${b.found}</td><td>${b.acc}</td><td>${b.rej}</td><td>${b.open}</td></tr>`).join('')}</table>
+${s.acc?`<h4>Changes made</h4><ul class="cl">${changes().map(i=>`<li>${pgOf(i)}<del>${esc(i.o0||i.o)}</del> → <ins>${esc(i.s)}</ins></li>`).join('')}</ul>`:''}
+<p class="stt">Automatic suggestions can be wrong. Nothing here verifies citations or scientific claims.</p>`}
+function settingsHtml(){const c=typeof CFG!='undefined'?CFG:null;
+ return `<h4>Privacy</h4><p>${c?(c.cloud?`AI check sends document text to <b>${esc(c.provider)}</b> (a cloud service) after you confirm. Everything else stays on this computer.`:`AI check uses <b>${esc(c.provider)}</b> on this computer. Nothing leaves it.`):'This online page processes text in your browser. AI check uses your Claude account.'}</p>
+<h4>Keyboard shortcuts</h4><ul><li><kbd>j</kbd> / <kbd>k</kbd> next / previous issue</li><li><kbd>a</kbd> accept (or mark reviewed)</li><li><kbd>r</kbd> reject (or dismiss)</li><li><kbd>u</kbd> or Ctrl+Z undo</li><li><kbd>?</kbd> this help</li></ul>
+<h4>Text size</h4><p>${FS.map((v,i)=>`<button class="btn${i==fsi?' pri':''}" data-fs="${i}">${FSN[i]}</button>`).join(' ')}</p><h4>Motion</h4><p>Animation is ${paused?'paused':'running'}. Use the Pause button, or your system's reduce-motion setting.</p>`}
+function openDlg(kind){$('#dt').textContent=kind=='summary'?'Review summary':'Settings and help';$('#db').innerHTML=kind=='summary'?summaryHtml():settingsHtml();$('#dsave').hidden=kind!='summary';if(!dlg.open)dlg.showModal()}
+$('#dx').onclick=()=>dlg.close();
+async function saveText(name,text){const b=new Blob([text],{type:'text/markdown'});if(typeof download=='function')return download(name,b);
+ if(window.claude){const d=await claude.use('downloads');if(d)await d.save({filename:name,data:b})}}
+$('#dsave').onclick=async()=>{const{s}=stats();
+ const md=['# DocOcto review report','',`Document: ${DOCM?DOCM.name:'demo paper'}`,`Date: ${new Date().toLocaleString()}`,'',`- Suggestions found: ${s.found}`,`- Accepted fixes: ${s.acc}`,`- Marked reviewed: ${s.rev}`,`- Rejected: ${s.rej}`,`- Dismissed: ${s.dis}`,`- Still open: ${s.open}`,'','## Changes made','',
+  ...changes().map(i=>`- ${pgOf(i)}"${i.o0||i.o}" → "${i.s}" (${CATS[i.cat][0]}). ${i.w[0]}`),'','## Change history','',...HIST.slice().reverse().map(h=>`- ${h.t.toLocaleTimeString()} ${h.a}: "${h.o}"${h.same?'':' → "'+h.s+'"'}`),'','Automatic suggestions can be wrong. This report does not verify citations or scientific claims.'].join('\n');
+ try{await saveText('dococto_review_report.md',md);toast('Report saved.')}catch(e){toast('Could not save the report.')}};
+function navTo(k){document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('on',a.id=='nv'+k));
+ if(k==0)doc.scrollTo({top:0,behavior:'smooth'});else if(k==1){const r=$('#il .ir');if(r)r.focus();else toast('No issues yet.')}else openDlg(k==2?'summary':'settings')}
+['nv0','nv1','nv2','nv3'].forEach((id,k)=>{const a=$('#'+id);a.onclick=()=>navTo(k);a.onkeydown=e=>{if(e.key=='Enter'||e.key==' '){e.preventDefault();navTo(k)}}});
+addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target;if(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable||document.querySelector('dialog[open]'))return;
+ const k=e.key.toLowerCase();if(k=='j')step(1);else if(k=='k')step(-1);else if(k=='a'&&!$('#ac').disabled)$('#ac').click();else if(k=='r'&&!$('#rj').disabled)$('#rj').click();else if(k=='u')undo();else if(e.key=='?')openDlg('settings')});
+// ===== Milestone 6: calm look, welcome guide, PDF zoom keeps your place, revised-text editing for PDFs =====
+const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+{const _o=fi.onchange;fi.onchange=function(){showView('review');return _o.apply(this,arguments)}}
+const PTM=['soft','dark','original'];let pti=Math.max(0,PTM.indexOf(lsGet('dococto_page')||'soft'));
+function applyPt(){doc.classList.remove('pt-soft','pt-dark','pt-original');doc.classList.add('pt-'+PTM[pti]);$('#pt').textContent='Page: '+PTM[pti]}
+$('#pt').onclick=()=>{pti=(pti+1)%3;lsSet('dococto_page',PTM[pti]);applyPt()};applyPt();
+$('#oa').onclick=e=>{const f=$('#dw').classList.toggle('oct-soft');e.currentTarget.textContent='Octopus: '+(f?'soft':'bold')};
+function setSeg(m){$('#me').className=m=='e'?'on':'';$('#mv').className=m=='v'?'on':''}
+function endEdit(quiet){const D=DOCM;if(!D||!D.editing)return;D.edited=[...doc.querySelectorAll('[data-rev]')].map(e=>e.textContent.trim());D.editing=false;doc.contentEditable=false;D.pg=[];setSeg('v');setupPdfPages(false);
+ if(!quiet)toast('Your edits are kept in the revised text and used by Export. The PDF pages still show your original file.')}
+$('#me').onclick=()=>{const D=DOCM;
+ if(D&&D.mode=='pdf'){if(D.editing)return;D.editing=true;D.tok=(D.tok||0)+1;const rv=getRevised();
+  doc.innerHTML='<div class="rvnote">Editing the revised text. The PDF pages are hidden while you edit, and your original file is never changed. Press View to go back to the pages.</div>'+rv.map((p,i)=>{const t=p.h=='H1'?'h1':p.k=='h2'?'h2':'p';return `<${t} data-rev="${i}">${esc(p.t)}</${t}>`}).join('');doc.contentEditable=true;setSeg('e');return}
+ doc.contentEditable=true;setSeg('e')};
+$('#mv').onclick=()=>{const D=DOCM;if(D&&D.mode=='pdf'&&D.editing)endEdit();else doc.contentEditable=false;setSeg('v')};
+// ===== Milestone 8: top-bar navigation, upload drop zone, text size =====
+const VIEWS=['home','review','manual','about'],NAVIDS=['nv0','nv1','nv2','nv3'];
+function showView(v,silent){if(!VIEWS.includes(v))v='home';VIEWS.forEach(n=>$('#view-'+n).classList.toggle('on',n==v));
+ document.body.classList.toggle('rv',v=='review');NAVIDS.forEach((id,k)=>{const a=$('#'+id);a.classList.toggle('on',VIEWS[k]==v);a.setAttribute('aria-current',VIEWS[k]==v?'page':'false')});
+ $('#top').classList.remove('open');$('#menu').setAttribute('aria-expanded','false');
+ if(!silent&&location.hash!=='#'+v)history.replaceState(null,'','#'+v);window.scrollTo(0,0);if(v=='review')requestAnimationFrame(size)}
+function goSection(id){if(!$('#view-home').classList.contains('on'))showView('home');requestAnimationFrame(()=>{const t=$('#'+id);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})}
+const act=(el,fn)=>{el.onclick=fn;el.onkeydown=e=>{if(e.key=='Enter'||e.key==' '){e.preventDefault();fn()}}};
+act($('#nv0'),()=>showView('home'));act($('#nv1'),()=>showView('review'));act($('#nv2'),()=>showView('manual'));act($('#nv3'),()=>showView('about'));
+act($('#nvf'),()=>goSection('features'));act($('#nvh'),()=>goSection('how'));act($('#h-start'),()=>goSection('start'));
+document.querySelectorAll('[data-go]').forEach(a=>act(a,()=>showView(a.dataset.go)));
+document.querySelectorAll('[data-section]').forEach(a=>act(a,()=>goSection(a.dataset.section)));
+document.querySelectorAll('[data-scroll]').forEach(a=>act(a,()=>{const t=$('#'+a.dataset.scroll);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}));
+$('#menu').onclick=()=>{const o=$('#top').classList.toggle('open');$('#menu').setAttribute('aria-expanded',o)};
+$('#h-demo').onclick=()=>showView('review');$('#sumbtn').onclick=()=>openDlg('summary');$('#setbtn').onclick=()=>openDlg('settings');
+addEventListener('hashchange',()=>showView(location.hash.slice(1),true));
+// upload drop zone (real: it feeds the same file input as the Upload button)
+const dz=$('#dz');
+function pickFile(f){const err=$('#dzerr');err.textContent='';if(!f)return;
+ if(!/\.(docx|pdf|txt|md)$/i.test(f.name)){err.textContent='This file type is not supported. Please use PDF, Word (.docx), text or Markdown.';return}
+ if(f.size>20*1024*1024){err.textContent='This file is larger than 20 MB. Please use a smaller file.';return}
+ if(f.size===0){err.textContent='This file is empty.';return}
+ const dt=new DataTransfer();dt.items.add(f);fi.files=dt.files;fi.dispatchEvent(new Event('change'))}
+['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over')}));
+dz.addEventListener('drop',e=>pickFile(e.dataTransfer.files[0]));
+act(dz,()=>fi.click());
+const FS=[1,1.15,1.3],FSN=['Normal','Large','Extra large'];let fsi=Math.max(0,FS.indexOf(+lsGet('dococto_fs')||1));
+function setFs(i){fsi=i;document.documentElement.style.setProperty('--fs',FS[i]);lsSet('dococto_fs',FS[i]);$('#fs').textContent='Aa: '+FSN[i];$('#fs').setAttribute('aria-label','Text size: '+FSN[i]+'. Press to change.');if(dlg.open&&$('#dt').textContent.startsWith('Settings'))$('#db').innerHTML=settingsHtml()}
+$('#fs').onclick=()=>setFs((fsi+1)%3);setFs(fsi);
+$('#db').addEventListener('click',e=>{const b=e.target.closest('[data-fs]');if(b)setFs(+b.dataset.fs)});
+// footer links appear only when you fill these in (nothing fake is shown)
+const REPO_URL='',OWNER_NAME='';
+if(REPO_URL){const a=$('#f-repo');a.href=REPO_URL;a.hidden=false}if(OWNER_NAME){$('#f-owner').textContent=OWNER_NAME;$('#f-people').hidden=false}
+showView((location.hash||'#home').slice(1),true);
+requestAnimationFrame(frame);render();renderHist();
+</script></body></html>
