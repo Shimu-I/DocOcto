@@ -1,0 +1,500 @@
+[
+ {
+  "id": "p00",
+  "text": "The results was significant in all three experiments.",
+  "gold": [
+   {
+    "o": "was",
+    "cat": "gram",
+    "fixes": [
+     "were"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p01",
+  "text": "In order to evaluate the model, we collected 500 samples.",
+  "gold": [
+   {
+    "o": "In order to",
+    "cat": "clar",
+    "fixes": [
+     "To"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p02",
+  "text": "We don't use any pretrained weights in this study.",
+  "gold": [
+   {
+    "o": "don't",
+    "cat": "style",
+    "fixes": [
+     "do not"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p03",
+  "text": "The model achieved very good performance on the test set.",
+  "gold": [
+   {
+    "o": "very good",
+    "cat": "clar",
+    "fixes": [
+     "strong",
+     "good",
+     "high"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p04",
+  "text": "These findings are consistent with prior work (Smith 2019).",
+  "gold": [
+   {
+    "o": "(Smith 2019)",
+    "cat": "cit",
+    "fixes": [
+     "(Smith, 2019)"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p05",
+  "text": "Previous studies have shown this effect (Jones et al 2020).",
+  "gold": [
+   {
+    "o": "et al",
+    "cat": "cit",
+    "fixes": [
+     "et al."
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p06",
+  "text": "Their is no evidence that the effect generalizes.",
+  "gold": [
+   {
+    "o": "Their",
+    "cat": "gram",
+    "fixes": [
+     "There"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p07",
+  "text": "The algorithm runs in linear time, it also uses little memory.",
+  "gold": [
+   {
+    "o": "time, it",
+    "cat": "gram",
+    "fixes": [
+     "time; it",
+     "time, and it"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p08",
+  "text": "We recieve the input as a sequence of tokens.",
+  "gold": [
+   {
+    "o": "recieve",
+    "cat": "gram",
+    "fixes": [
+     "receive"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p09",
+  "text": "The the proposed method outperforms the baseline.",
+  "gold": [
+   {
+    "o": "The the",
+    "cat": "gram",
+    "fixes": [
+     "The"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p10",
+  "text": "A lot of researchers have studied this problem.",
+  "gold": [
+   {
+    "o": "A lot of",
+    "cat": "style",
+    "fixes": [
+     "Many"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p11",
+  "text": "The reaction was fast, which effects the measured yield.",
+  "gold": [
+   {
+    "o": "effects",
+    "cat": "gram",
+    "fixes": [
+     "affects"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p12",
+  "text": "The results clearly prove our hypothesis.",
+  "gold": [
+   {
+    "o": "clearly prove",
+    "cat": "clar",
+    "fixes": [
+     "support",
+     "are consistent with"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p13",
+  "text": "We used a thing called dropout to avoid overfitting.",
+  "gold": [
+   {
+    "o": "a thing called dropout",
+    "cat": "clar",
+    "fixes": [
+     "a technique called dropout",
+     "dropout"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p14",
+  "text": "The experiments shows that accuracy improves with depth.",
+  "gold": [
+   {
+    "o": "shows",
+    "cat": "gram",
+    "fixes": [
+     "show"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p15",
+  "text": "He suggested that the model be tested on larger datasets.",
+  "gold": []
+ },
+ {
+  "id": "p16",
+  "text": "This is a very very important result.",
+  "gold": [
+   {
+    "o": "very very",
+    "cat": "rep",
+    "fixes": [
+     "very"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p17",
+  "text": "Overall, we think our approach is kind of better than the baselines.",
+  "gold": [
+   {
+    "o": "kind of better",
+    "cat": "style",
+    "fixes": [
+     "somewhat better",
+     "better"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p18",
+  "text": "Table 2 reports the accuracy; the highest value are shown in bold.",
+  "gold": [
+   {
+    "o": "value are",
+    "cat": "gram",
+    "fixes": [
+     "value is"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p19",
+  "text": "The sample size was small, however the effect was large.",
+  "gold": [
+   {
+    "o": "small, however the",
+    "cat": "gram",
+    "fixes": [
+     "small; however, the",
+     "small. However, the"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p20",
+  "text": "Neural networks are trained using gradient descent.",
+  "gold": []
+ },
+ {
+  "id": "p21",
+  "text": "Due to the fact that the dataset is small, we used cross-validation.",
+  "gold": [
+   {
+    "o": "Due to the fact that",
+    "cat": "clar",
+    "fixes": [
+     "Because"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p22",
+  "text": "We evaluate on three benchmarks. And we report mean accuracy.",
+  "gold": [
+   {
+    "o": "And",
+    "cat": "str",
+    "fixes": [
+     "Additionally,",
+     "In addition,",
+     "Also,"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p23",
+  "text": "It's clear that more data would help.",
+  "gold": [
+   {
+    "o": "It's",
+    "cat": "style",
+    "fixes": [
+     "It is"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p24",
+  "text": "The authors (Brown and Lee 2018) propose a new loss function.",
+  "gold": [
+   {
+    "o": "(Brown and Lee 2018)",
+    "cat": "cit",
+    "fixes": [
+     "(Brown and Lee, 2018)",
+     "(Brown & Lee, 2018)"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p25",
+  "text": "Each participant completed a questionnaire, then they were interviewed.",
+  "gold": []
+ },
+ {
+  "id": "p26",
+  "text": "The model were trained for 50 epochs with a batch size of 32.",
+  "gold": [
+   {
+    "o": "model were",
+    "cat": "gram",
+    "fixes": [
+     "model was"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p27",
+  "text": "In this paper we proposes a novel framework.",
+  "gold": [
+   {
+    "o": "we proposes",
+    "cat": "gram",
+    "fixes": [
+     "we propose"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p28",
+  "text": "This approach is always better than random search.",
+  "gold": [
+   {
+    "o": "always better",
+    "cat": "clar",
+    "fixes": [
+     "generally better",
+     "better"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p29",
+  "text": "The function always returns a positive integer.",
+  "gold": []
+ },
+ {
+  "id": "p30",
+  "text": "Results was obtained using a 5-fold cross validation procedure.",
+  "gold": [
+   {
+    "o": "Results was",
+    "cat": "gram",
+    "fixes": [
+     "Results were"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p31",
+  "text": "Firstly, we preprocess the text. Secondly, we tokenize it.",
+  "gold": []
+ },
+ {
+  "id": "p32",
+  "text": "The system perform well under noisy conditions.",
+  "gold": [
+   {
+    "o": "system perform",
+    "cat": "gram",
+    "fixes": [
+     "system performs"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p33",
+  "text": "Gradient descent is an optimization algorithm that is used for optimizing the parameters.",
+  "gold": [
+   {
+    "o": "that is used for optimizing the parameters",
+    "cat": "rep",
+    "fixes": [
+     "that optimizes the parameters",
+     "that updates the parameters",
+     "that tunes the parameters"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p34",
+  "text": "There are a number of reasons for this.",
+  "gold": [
+   {
+    "o": "a number of",
+    "cat": "clar",
+    "fixes": [
+     "several",
+     "many"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p35",
+  "text": "The effect size was 0.45 (p < 0.01).",
+  "gold": []
+ },
+ {
+  "id": "p36",
+  "text": "We thank the reviewers for there helpful comments.",
+  "gold": [
+   {
+    "o": "there helpful",
+    "cat": "gram",
+    "fixes": [
+     "their helpful"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p37",
+  "text": "Participants was recruited online, and a lot of them completed the survey.",
+  "gold": [
+   {
+    "o": "Participants was",
+    "cat": "gram",
+    "fixes": [
+     "Participants were"
+    ]
+   },
+   {
+    "o": "a lot of",
+    "cat": "style",
+    "fixes": [
+     "many",
+     "most"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p38",
+  "text": "Their results is promising, but we don't claim they generalize.",
+  "gold": [
+   {
+    "o": "results is",
+    "cat": "gram",
+    "fixes": [
+     "results are"
+    ]
+   },
+   {
+    "o": "don't",
+    "cat": "style",
+    "fixes": [
+     "do not"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "p39",
+  "text": "We trained the model for 50 epochs using the Adam optimizer. The learning rate was set to 0.001, and early stopping was applied after five epochs without improvement.",
+  "gold": []
+ },
+ {
+  "id": "p40",
+  "text": "Task W1 W2 W3 W4 W5 W6 W7 3 4 5 3 4 5",
+  "gold": []
+ }
+]

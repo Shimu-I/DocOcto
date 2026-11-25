@@ -1,0 +1,1 @@
+# Words LanguageTool should not flag (one per line), for example technical terms.
